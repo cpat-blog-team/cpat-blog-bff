@@ -89,7 +89,8 @@
     "airbnb-base"
   ],
   "plugins": [
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "prettier",
   ],
   "settings": {}
 }

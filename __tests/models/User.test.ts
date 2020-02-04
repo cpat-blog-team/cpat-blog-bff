@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable import/no-extraneous-dependencies */
 import request from 'supertest';
 import mockingoose from 'mockingoose';
 import app from '../../src/app';
