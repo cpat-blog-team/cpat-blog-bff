@@ -90,7 +90,7 @@
   ],
   "plugins": [
     "@typescript-eslint",
-    "prettier",
+    "prettier"
   ],
   "settings": {}
 }
