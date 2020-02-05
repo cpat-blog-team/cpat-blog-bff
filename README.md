@@ -13,6 +13,11 @@
   <img src="https://snyk.io//test/github/sidhantpanda/docker-express-typescript-boilerplate/badge.svg?targetFile=package.json" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io//test/github/sidhantpanda/docker-express-typescript-boilerplate?targetFile=package.json" style="max-width:100%;">
 </a>
 
+# Technical Debt
+
+1) Fix testing environment (using request instead of mock request)
+2) Fix eslint
+
 # Prereq Instructions
 Install: 
 1) https://www.npmjs.com/package/ts-node

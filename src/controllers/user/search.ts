@@ -1,30 +1,24 @@
 import { RequestHandler } from 'express';
 import handleErrorMiddleware from '../../middleware/handle-error-middleware';
-import Book from '../../models/Book';
+import User from '../../models/User';
 
-/**
- * Builds a mongoose query object to search books according to book name and author name.
- * @param name String containing the book name or part of the book's name
- * @param author String containing the author name or part of the author's name
- */
-const buildBookSeachQuery = (name: string, author: string) => {
-  const query: any = {};
-  if (name) {
-    query.name = new RegExp(`.*${name}.*`, 'i');
-  }
-  if (author) {
-    query.author = new RegExp(`.*${author}.*`, 'i');
-  }
 
-  return query;
+const buildUserSearchQuery = (email: string) => {
+	const query: any = {};
+
+	if (email) {
+		query.email = new RegExp(`.*${email}.*`, 'i');
+	}
+
+	return query;
 };
 
 const get: RequestHandler = async (req, res) => {
-  const { name, author } = req.query;
+	const { email } = req.query;
 
-  const query = buildBookSeachQuery(name, author);
-  const books = await Book.find(query);
-  res.send({ books });
+	const query = buildUserSearchQuery(email);
+	const users = [ await User.findOne(query) ];
+	res.send({ users });
 };
 
 export default handleErrorMiddleware(get);

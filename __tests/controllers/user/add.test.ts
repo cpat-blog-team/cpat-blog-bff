@@ -1,43 +1,39 @@
+/* eslint-disable prefer-arrow-callback */
+/* eslint-disable indent */
+/* eslint-disable no-tabs */
+import request from 'supertest';
 import User from '../../../src/models/User';
 import * as UserController from '../../../src/controllers/user';
+import app from '../../../src/app';
 
 describe('This tests if you can add a user using the UserController', () => {
-  const addUser: any = async (req: any) => {
-    const { name, email, password } = req.body;
 
-    const user = new User({ name, email, password });
-    await user.save();
-
-    return {
-      message: 'Saved',
-      user: user.toJSON()
+	test('Test to see if receive valid response from the controller', () => {
+    let expectedJSON = {
+			name: 'test',
+			email: 'test@test.com',
+			password: 'test'
     };
-  };
-
-  test('Test to see if receive valid response from the controller', () => {
-    const expectedJson = {
-      message: 'Saved',
-      user: {
-        _id: '5e39c52fab85c94654645a60',
-        name: 'test',
-        email: 'test@test.com',
-        password: 'test'
-      }
+    
+    let request = require('request');
+    let options = {
+      'method': 'POST',
+      'url': 'http://localhost:3000/user/add',
+      'headers': {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(expectedJSON)
     };
 
-    const mockUser = addUser(
-      { body: { name: 'asdf', email: 'test@test.com', password: 'test' } },
-      null,
-      null
-    );
-    
-    // try {
-    //     mockUser.then((data: any) => expect(data).toBe(expectedJson));
-    // } catch(e) {
-        
-    // } finally {
+    request(options, function (error : any, response : any) {
+      if (error) throw new Error(error);
 
-    // }
-    
-  });
+      const respBody = JSON.parse(response.body);
+      expect(respBody.user.name).toEqual(expectedJSON.name);
+      expect(respBody.user.email).toEqual(expectedJSON.email);
+      expect(respBody.message).toEqual('Saved');
+
+    });
+	});
 });

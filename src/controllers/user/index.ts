@@ -4,8 +4,5 @@ import all from './all';
 import search from './search';
 
 export {
-  add,
-  addUser,
-  all,
-  search
+	add, addUser, all, search
 };
