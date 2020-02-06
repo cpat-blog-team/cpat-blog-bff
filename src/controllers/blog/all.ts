@@ -1,10 +1,10 @@
 import { RequestHandler } from 'express';
 import handleErrorMiddleware from '../../middleware/handle-error-middleware';
-import User from '../../models/User';
+import Blog from '../../models/Blog';
 
 const all: RequestHandler = async (req, res) => {
-	const users = await User.find();
-	res.send({ users });
+	const blogs = await Blog.find();
+	res.send({ blogs });
 };
 
 export default handleErrorMiddleware(all);
