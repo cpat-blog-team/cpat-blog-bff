@@ -19,7 +19,6 @@
 2. Add more unit test for controllers
 3. Create and configure test enviorment
 4. Add created_at, deleted_at, updated_at, User session_id (should be hash) columns
-5. Change database name to blog (currently book)
 
 # Prereq Instructions
 
