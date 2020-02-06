@@ -1,12 +1,13 @@
 /* eslint-disable prefer-arrow-callback */
 /* eslint-disable indent */
 /* eslint-disable no-tabs */
-import request from 'supertest';
-import User from '../../../src/models/User';
+
 import * as UserController from '../../../src/controllers/user';
-import app from '../../../src/app';
 
 describe('This tests if you can add a user using the UserController', () => {
+  test('Test to see if user add controller is exposed for endpoint', () => {
+      jest.spyOn(UserController, 'add');
+    });
 
 	test('Test to see if receive valid response from the controller', () => {
     let expectedJSON = {
