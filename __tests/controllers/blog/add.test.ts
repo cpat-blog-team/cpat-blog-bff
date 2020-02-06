@@ -1,16 +1,15 @@
 /* eslint-disable prefer-arrow-callback */
 /* eslint-disable indent */
 /* eslint-disable no-tabs */
-import request from 'supertest';
-import Blog from '../../../src/models/Blog';
+
 import * as BlogController from '../../../src/controllers/blog';
-import app from '../../../src/app';
-import { TIMEOUT } from 'dns';
 
 describe('This tests if you can add a blog using the BlogController', () => {
-	test('canary', () => {
-		expect(false).toBe(false);
-	});
+
+	test('Test to see if blog add controller is exposed for endpoint', () => {
+        jest.spyOn(BlogController, 'add');
+    });
+
 
 	test('Test to see if receive valid response from the controller', () => {
 		let expectedJSON = {
