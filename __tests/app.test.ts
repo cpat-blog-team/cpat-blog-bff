@@ -11,7 +11,7 @@ describe('App Test', () => {
 
 	test('GET /book/all should return 200', (done) => {
 		request(app)
-			.post('/book/all')
+			.get('/book/all')
 			.expect(200, done);
 	});
 });
