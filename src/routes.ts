@@ -4,6 +4,7 @@ import apiSpec from '../openapi.json';
 
 import * as BookController from './controllers/book';
 import * as UserController from './controllers/user';
+import * as BlogController from './controllers/blog';
 
 const swaggerUiOptions = {
 	customCss: '.swagger-ui .topbar { display: none }'
@@ -20,6 +21,11 @@ router.get('/book/search', BookController.search);
 router.post('/user/add', UserController.add);
 router.get('/user/search', UserController.search);
 router.get('/user/all', UserController.all);
+
+// Blog routes 
+router.post('/blog/add', BlogController.add);
+router.get('/blog/search', BlogController.search);
+router.get('/blog/all', BlogController.all);
 
 // Dev routes
 if (process.env.NODE_ENV === 'development') {
