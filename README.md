@@ -18,7 +18,7 @@
 1. Fix eslint
 2. Add more unit test for controllers
 3. Create and configure test enviorment
-4. Add created_at, deleted_at and updated_at columns
+4. Add created_at, deleted_at, updated_at, User session_id (should be hash) columns
 
 # Prereq Instructions
 
