@@ -18,8 +18,8 @@ const schema = new Schema({
 	title: { type: String, required: true },
 	content: { type: String, required: true },
 	version: { type: Number, required: true },
-	createdAt: { type: String, required: true },
-	updatedAt: { type: String, required: true }
+	createdAt: { type: Date, required: false },
+	updatedAt: { type: Date, required: false }
 });
 
 const Blog: IBlogModel = model<IBlog, IBlogModel>('Blog', schema);
