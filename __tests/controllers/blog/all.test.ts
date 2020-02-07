@@ -1,13 +1,10 @@
-/* eslint-disable prefer-arrow-callback */
-/* eslint-disable indent */
-/* eslint-disable no-tabs */
 import * as BlogController from '../../../src/controllers/blog';
 
 describe('This tests if you can receive all blogs using the BlogController', () => {
 	test('Test to see if all controller is exposed for endpoint', () => {
 		jest.spyOn(BlogController, 'all');
 	});
-	
+
 	test('Test to see if receive valid response from the controller', () => {
 		let request = require('request');
 		let options = {
