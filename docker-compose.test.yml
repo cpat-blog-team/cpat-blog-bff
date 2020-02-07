@@ -1,17 +1,15 @@
 version: '3'
 
 services:
-  mongo-dev:
+  mongo-test:
     image: mongo
-    container_name: mongo-dev
+    container_name: mongo-test
     restart: always
     networks:
-      - dev-network
-    volumes:
-      - ./data/dev/mongo:/data/db
+      - test-network
     ports:
       - '27017:27017'
 
 networks:
-  dev-network:
+  test-network:
     driver: bridge

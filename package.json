@@ -22,7 +22,7 @@
 		"lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts",
 		"dev": "./scripts/dev.sh",
 		"start": "node dist/server.js",
-		"test": "jest",
+		"test": "./scripts/test.sh",
 		"fix-lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts --fix"
 	},
 	"dependencies": {
@@ -48,6 +48,7 @@
 		"@types/swagger-ui-express": "4.1.1",
 		"@typescript-eslint/eslint-plugin": "2.18.0",
 		"@typescript-eslint/parser": "2.18.0",
+		"concurrently": "^5.1.0",
 		"eslint": "6.8.0",
 		"eslint-config-airbnb-base": "14.0.0",
 		"eslint-plugin-import": "2.20.0",

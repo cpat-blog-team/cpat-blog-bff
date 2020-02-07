@@ -2,8 +2,7 @@
 set -e
 
 cleanup() {
-    docker-compose -f docker-compose.dev.yml down
-    docker conatiner stop mongo-dev
+    docker-compose -f docker-compose.test.yml down
     trap '' EXIT INT TERM
     exit $err
 }
@@ -21,7 +20,7 @@ if [ -z "$(docker network ls -qf name=^entropic$)" ]; then
   docker network create entropic >/dev/null
 fi
 
-COMPOSE_HTTP_TIMEOUT=120 docker-compose -f docker-compose.dev.yml up -d --force-recreate
+COMPOSE_HTTP_TIMEOUT=120 docker-compose -f docker-compose.test.yml up -d --force-recreate
 
 NODE_ENV=development
-nodemon --exec 'npm run eslint && ts-node src/server.ts'
+parallel ::: "nodemon" "sleep 3 && jest"
