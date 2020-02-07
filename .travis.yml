@@ -1,4 +1,10 @@
 language: node_js
+os: linux
+dist: bionic
+addons:
+  apt:
+    packages:
+      - parallel
 node_js:
   - 10
 jobs:
