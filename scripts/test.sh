@@ -22,5 +22,4 @@ fi
 
 COMPOSE_HTTP_TIMEOUT=120 docker-compose -f docker-compose.test.yml up -d --force-recreate
 
-NODE_ENV=development
-parallel ::: "nodemon" "sleep 3 && jest"
+NODE_ENV=development nodemon

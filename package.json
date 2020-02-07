@@ -4,7 +4,7 @@
 	"description": "A minimalist TypeScript-Express boilerplate",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/sidhantpanda/express-typescript-boilerplate.git"
+		"url": "github.com"
 	},
 	"keywords": [
 		"TypeScript",
@@ -13,7 +13,7 @@
 		"boilerplate",
 		"eslint"
 	],
-	"author": "Sidhant Panda",
+	"author": "CPAT",
 	"main": "dist/index.js",
 	"scripts": {
 		"eslint": "eslint src/server.ts",
@@ -22,7 +22,9 @@
 		"lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts",
 		"dev": "./scripts/dev.sh",
 		"start": "node dist/server.js",
-		"test": "./scripts/test.sh",
+		"test": "npm-run-all --parallel test-jest test-script",
+		"test-script": "./scripts/test.sh",
+		"test-jest": "sleep 5; jest",
 		"fix-lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts --fix"
 	},
 	"dependencies": {
