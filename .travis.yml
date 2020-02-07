@@ -1,14 +1,13 @@
 language: node_js
 node_js:
   - 10
-
 jobs:
   include:
     - stage: 'Lint check'
       name: 'Lint check'
       script: npm run eslint
     - stage: 'Test'
-      name: 'Unit Testing'
+      name: 'Unit & Integration Testing'
       script: npm run test
     - stage: 'Run typescript build'
       name: 'Run typescript build'
