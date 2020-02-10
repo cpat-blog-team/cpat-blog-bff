@@ -1,15 +1,9 @@
-/* eslint-disable prefer-arrow-callback */
-/* eslint-disable indent */
-/* eslint-disable no-tabs */
-
 import * as BlogController from '../../../src/controllers/blog';
 
 describe('This tests if you can add a blog using the BlogController', () => {
-
 	test('Test to see if blog add controller is exposed for endpoint', () => {
-        jest.spyOn(BlogController, 'add');
-    });
-
+		jest.spyOn(BlogController, 'add');
+	});
 
 	test('Test to see if receive valid response from the controller', () => {
 		let expectedJSON = {
