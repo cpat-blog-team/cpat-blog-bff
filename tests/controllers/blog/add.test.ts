@@ -7,11 +7,12 @@ describe('This tests if you can add a blog using the BlogController', () => {
 
 	test('Test to see if receive valid response from the controller', (done) => {
 		let expectedJSON = {
-			_id: '5e3c38c7090c2b69a1e5b57e',
-			userId: '5e39bf339ff0183991cb77e7',
-			name: 'test',
-			title: 'the best vegetable',
-			content: 'potato po tah to',
+			_id: '12345',
+			userId: '12345',
+			username: 'BATMAN',
+			title: 'Im batman',
+			summary: 'the Dark Knight',
+			content: 'Wheres Racheal',
 			version: 0,
 			__v: ''
 		};
@@ -28,10 +29,11 @@ describe('This tests if you can add a blog using the BlogController', () => {
 		};
 
 		request(options, function (error: any, response: any) {
-			if (error) throw new Error(error);
+			expect(error).toBe(null);
 
 			const respBody = JSON.parse(response.body);
 
+			expect(typeof respBody.blog).toBe('object');
 			expect(Object.keys(respBody.blog)).toEqual(Object.keys(expectedJSON));
 			expect(Object.entries(respBody)[0]).toEqual(['message', 'Saved']);
 			done();

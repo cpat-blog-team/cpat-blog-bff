@@ -7,8 +7,9 @@ describe('test mongoose User model', () => {
 		const _doc = {
 			_id: '507f191e810c19729de860ea',
 			userId: '5e39bf339ff0183991cb77e7',
-			name: 'name',
+			username: 'name',
 			title: 'star wars VVV',
+			summary: 'a story about space wizards',
 			content: 'obiwan is alive',
 			version: 0
 		};

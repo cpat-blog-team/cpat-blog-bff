@@ -2,7 +2,6 @@ import { Router } from 'express';
 import swaggerUi from 'swagger-ui-express';
 import apiSpec from '../openapi.json';
 
-import * as BookController from './controllers/book';
 import * as UserController from './controllers/user';
 import * as BlogController from './controllers/blog';
 
@@ -11,11 +10,6 @@ const swaggerUiOptions = {
 };
 
 const router = Router();
-
-// Book routes
-router.post('/book/add', BookController.add);
-router.get('/book/all', BookController.all);
-router.get('/book/search', BookController.search);
 
 // User routes
 router.post('/user/add', UserController.add);
