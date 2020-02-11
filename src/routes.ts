@@ -22,9 +22,12 @@ router.get('/blog/search', BlogController.search);
 router.get('/blog/all', BlogController.all);
 
 // Dev routes
+console.log('ENVIRONMENT:', process.env.NODE_ENV);
+
 if (process.env.NODE_ENV === 'development') {
 	router.use('/dev/api-docs', swaggerUi.serve);
 	router.get('/dev/api-docs', swaggerUi.setup(apiSpec, swaggerUiOptions));
+	router.delete('/dev/wipe', BlogController.wipe);
 }
 
 export default router;
