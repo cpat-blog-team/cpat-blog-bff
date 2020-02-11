@@ -20,7 +20,7 @@
 		"postinstall": "chmod +x ./scripts/dev.sh",
 		"build": "tsc",
 		"lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts",
-		"dev": "./scripts/dev.sh",
+		"dev": "NODE_ENV=development ./scripts/dev.sh",
 		"start": "node dist/server.js",
 		"test": "npm-run-all --parallel test-jest test-script",
 		"test-script": "./scripts/test.sh",
