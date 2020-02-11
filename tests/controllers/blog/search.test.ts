@@ -5,7 +5,7 @@ describe('This tests if you can search for a user using the BlogController', () 
 		jest.spyOn(BlogController, 'search');
 	});
 
-	test('Test to see if receive valid response from the controller', () => {
+	test('Test to see if receive valid response from the controller', (done) => {
 		let request = require('request');
 		let options = {
 			method: 'GET',
@@ -16,16 +16,17 @@ describe('This tests if you can search for a user using the BlogController', () 
 			}
 		};
 
-		request(options, function(error: any, response: any) {
+		request(options, function (error: any, response: any) {
 			if (error) throw new Error(error);
 			const respBody = JSON.parse(response.body);
 
 			expect(respBody.blogs.length).toBeLessThan(2);
 			expect(respBody.blogs.length).toBeGreaterThan(0);
+			done();
 		});
 	});
 
-	test('Test to see if the search is empty', () => {
+	test('Test to see if the search is empty', (done) => {
 		let request = require('request');
 		let options = {
 			method: 'GET',
@@ -36,11 +37,12 @@ describe('This tests if you can search for a user using the BlogController', () 
 			}
 		};
 
-		request(options, function(error: any, response: any) {
+		request(options, function (error: any, response: any) {
 			if (error) throw new Error(error);
 			const respBody = JSON.parse(response.body);
 
 			expect(respBody.blogs.length).toEqual(0);
+			done();
 		});
 	});
 });

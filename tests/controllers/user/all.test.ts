@@ -5,7 +5,7 @@ describe('This tests if you can receive all users using the UserController', () 
 		jest.spyOn(UserController, 'all');
 	});
 
-	test('Test to see if receive valid response from the controller', () => {
+	test('Test to see if receive valid response from the controller', (done) => {
 		let request = require('request');
 		let options = {
 			method: 'GET',
@@ -16,11 +16,12 @@ describe('This tests if you can receive all users using the UserController', () 
 			}
 		};
 
-		request(options, function(error: any, response: any) {
+		request(options, function (error: any, response: any) {
 			if (error) throw new Error(error);
 
 			const respBody = JSON.parse(response.body);
 			expect(respBody.users).toBeInstanceOf(Array);
+			done();
 		});
 	});
 });

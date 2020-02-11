@@ -17,7 +17,10 @@
 				"ignorePackages": true
 			}
 		],
-		"spaced-comment": ["error", "always"],
+		"spaced-comment": [
+			"error",
+			"always"
+		],
 		"eqeqeq": [
 			"error",
 			"always",
@@ -28,17 +31,25 @@
 		"no-underscore-dangle": [
 			"error",
 			{
-				"allow": ["_id"]
+				"allow": [
+					"_id"
+				]
 			}
 		],
 		"camelcase": [
 			"error",
 			{
-				"allow": ["oauth2_v2", "user_id"],
+				"allow": [
+					"oauth2_v2",
+					"user_id"
+				],
 				"properties": "never"
 			}
 		],
-		"func-names": ["error", "never"],
+		"func-names": [
+			"error",
+			"never"
+		],
 		"semi": "error",
 		"no-extra-semi": 0,
 		"import/no-unresolved": "off",
@@ -57,15 +68,19 @@
 			}
 		],
 		"handle-callback-err": "error",
-		"quotes": ["error", "single"]
+		"quotes": [
+			"error",
+			"single"
+		]
 	},
 	"overrides": [
 		{
-			"files": ["**/*.ts"],
+			"files": [
+				"**/*.ts"
+			],
 			"parser": "@typescript-eslint/parser",
 			"rules": {
 				"no-undef": "off",
-				"indent": [2, "tab"],
 				"camelcase": 0,
 				"no-underscore-dangle": 0,
 				"no-tabs": 0,
@@ -74,6 +89,9 @@
 		}
 	],
 	"extends": [],
-	"plugins": ["@typescript-eslint", "prettier"],
+	"plugins": [
+		"@typescript-eslint",
+		"prettier"
+	],
 	"settings": {}
 }
