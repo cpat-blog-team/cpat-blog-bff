@@ -5,7 +5,7 @@ describe('This tests if you can add a blog using the BlogController', () => {
 		jest.spyOn(BlogController, 'add');
 	});
 
-	test('Test to see if receive valid response from the controller', () => {
+	test('Test to see if receive valid response from the controller', (done) => {
 		let expectedJSON = {
 			_id: '5e3c38c7090c2b69a1e5b57e',
 			userId: '5e39bf339ff0183991cb77e7',
@@ -27,13 +27,14 @@ describe('This tests if you can add a blog using the BlogController', () => {
 			body: JSON.stringify(expectedJSON)
 		};
 
-		request(options, function(error: any, response: any) {
+		request(options, function (error: any, response: any) {
 			if (error) throw new Error(error);
 
 			const respBody = JSON.parse(response.body);
 
 			expect(Object.keys(respBody.blog)).toEqual(Object.keys(expectedJSON));
 			expect(Object.entries(respBody)[0]).toEqual(['message', 'Saved']);
+			done();
 		});
 	});
 });

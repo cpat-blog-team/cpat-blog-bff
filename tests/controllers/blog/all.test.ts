@@ -5,7 +5,7 @@ describe('This tests if you can receive all blogs using the BlogController', () 
 		jest.spyOn(BlogController, 'all');
 	});
 
-	test('Test to see if receive valid response from the controller', () => {
+	test('Test to see if receive valid response from the controller', (done) => {
 		let request = require('request');
 		let options = {
 			method: 'GET',
@@ -16,10 +16,11 @@ describe('This tests if you can receive all blogs using the BlogController', () 
 			}
 		};
 
-		request(options, function(error: any, response: any) {
+		request(options, function (error: any, response: any) {
 			if (error) throw new Error(error);
 			const respBody = JSON.parse(response.body);
 			expect(respBody.blogs).toBeInstanceOf(Array);
+			done();
 		});
 	});
 });

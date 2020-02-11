@@ -5,7 +5,7 @@ describe('This tests if you can add a user using the UserController', () => {
 		jest.spyOn(UserController, 'add');
 	});
 
-	test('Test to see if receive valid response from the controller', () => {
+	test('Test to see if receive valid response from the controller', (done) => {
 		let expectedJSON = {
 			name: 'test',
 			email: 'test@test.com',
@@ -23,13 +23,14 @@ describe('This tests if you can add a user using the UserController', () => {
 			body: JSON.stringify(expectedJSON)
 		};
 
-		request(options, function(error: any, response: any) {
+		request(options, function (error: any, response: any) {
 			if (error) throw new Error(error);
 
 			const respBody = JSON.parse(response.body);
 			expect(respBody.user.name).toEqual(expectedJSON.name);
 			expect(respBody.user.email).toEqual(expectedJSON.email);
 			expect(respBody.message).toEqual('Saved');
+			done();
 		});
 	});
 });
