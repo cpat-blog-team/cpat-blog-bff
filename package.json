@@ -25,7 +25,7 @@
 		"test": "npm-run-all --parallel test-jest test-script",
 		"test-script": "./scripts/test.sh",
 		"test-jest": "sleep 30; jest",
-		"tdd": "jest --watch",
+		"tdd": "jest --watch --runInBand",
 		"fix-lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts --fix"
 	},
 	"dependencies": {
