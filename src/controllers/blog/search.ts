@@ -12,7 +12,6 @@ const search: RequestHandler = async (req, res) => {
 		blogs = await Blog.find(query);
 	}
 
-	console.log('FOUND BY TITLE:', blogs);
 	res.send({ blogs });
 };
 
