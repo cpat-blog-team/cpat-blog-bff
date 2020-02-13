@@ -1,29 +1,18 @@
 import { RequestHandler } from 'express';
 import handleErrorMiddleware from '../../middleware/handle-error-middleware';
-import Blog from '../../models/Blog';
-
-
-const buildBlogSearchQuery = (userId: string) => {
-	const query: any = {};
-
-	if (userId) {
-		query.userId = new RegExp(`.*${userId}.*`, 'i');
-	}
-
-	return query;
-};
+import Blog, { IBlog } from '../../models/Blog';
 
 const search: RequestHandler = async (req, res) => {
-	const { userId } = req.query;
+	const { title } = req.query;
 
-	const query = buildBlogSearchQuery(userId);
-	let blogs: Array<Object> = [];
+	const query = { title };
+	let blogs: IBlog[] = [];
 
-	if(Object.entries(query).length > 0) {
-		blogs = [ await Blog.findOne(query) ];
+	if (Object.entries(query).length > 0) {
+		blogs = await Blog.find(query);
 	}
-	
-	console.log(blogs);
+
+	console.log('FOUND BY TITLE:', blogs);
 	res.send({ blogs });
 };
 

@@ -40,7 +40,7 @@ describe('Search for a user using the BlogController', () => {
 		let request = require('request');
 		let options = {
 			method: 'GET',
-			url: 'http://localhost:3000/blog/search?userId=5e39bf339ff0183991cb77e7',
+			url: `http://localhost:3000/blog/search?title=${exampleBlogPost.title}`,
 			headers: {
 				'Content-Type': 'application/json; charset=utf-8',
 				Accept: 'application/json'
@@ -50,10 +50,11 @@ describe('Search for a user using the BlogController', () => {
 		request(options, function (error: any, response: any) {
 			expect(error).toBe(null);
 			const respBody = JSON.parse(response.body);
-
-			// expect(respBody.blogs.includes(null)).toBe(false);
-			expect(respBody.blogs.length).toBeLessThan(2);
-			expect(respBody.blogs.length).toBeGreaterThan(0);
+			const { blogs } = respBody;
+			expect(Array.isArray(blogs)).toBe(true);
+			expect(blogs.includes(null)).toBe(false);
+			const firstPost = blogs[0];
+			expect(firstPost.title).toBe(exampleBlogPost.title);
 			done();
 		});
 	});
