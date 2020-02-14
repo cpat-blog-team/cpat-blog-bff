@@ -15,3 +15,13 @@ export const examplePost: Post = {
   content: 'bobs content',
   version: 1
 };
+
+export const exampleList = (numberOfPosts: number) => {
+  const list: Post[] = [];
+
+  for (let c = 0; c < numberOfPosts; c++) {
+    list.push(examplePost);
+  }
+
+  return list;
+};
