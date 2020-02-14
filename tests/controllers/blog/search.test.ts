@@ -9,7 +9,7 @@ describe('Search for a user using the BlogController', () => {
 		summary: string;
 		content: string;
 		version: number;
-	}
+	};
 
 	const exampleBlogPost: Post = {
 		userId: '1',
@@ -20,13 +20,26 @@ describe('Search for a user using the BlogController', () => {
 		version: 1
 	};
 
+	const makeQuery = (method: string, route: string, body: string) => {
+		const query: any = {
+			method,
+			url: `http://localhost:3000${route}`,
+			headers: {
+				'Content-Type': 'application/json; charset=utf-8',
+				Accept: 'application/json'
+			}
+		};
+		if (body) query.body = body;
+		return query;
+	};
+
 	// wipe DB and seed with exampleBlogPost
 	beforeAll(async () => {
-		const wipeQuery = { method: 'DELETE', url: 'http://localhost:3000/dev/wipe', headers: { 'Content-Type': 'application/json; charset=utf-8', Accept: 'application/json' } };
+		const wipeQuery = makeQuery('DELETE', '/dev/wipe', null);
 		await request(wipeQuery, (error: any, response: any) => {
 			if (error) throw new Error(error);
 		});
-		const addQuery = { method: 'POST', url: 'http://localhost:3000/blog/add', headers: { 'Content-Type': 'application/json; charset=utf-8', Accept: 'application/json' }, body: JSON.stringify(exampleBlogPost) };
+		const addQuery = makeQuery('POST', '/blog/add', JSON.stringify(exampleBlogPost));
 		await request(addQuery, function (error: any, response: any) {
 			if (error) throw new Error(error);
 		});
@@ -36,21 +49,14 @@ describe('Search for a user using the BlogController', () => {
 		jest.spyOn(BlogController, 'search');
 	});
 
-	test('Searching by title should return blog with matching title', (done) => {
-		let request = require('request');
-		let options = {
-			method: 'GET',
-			url: `http://localhost:3000/blog/search?title=${exampleBlogPost.title}`,
-			headers: {
-				'Content-Type': 'application/json; charset=utf-8',
-				Accept: 'application/json'
-			}
-		};
-
+	test('Should return correct blog when searching by title', (done) => {
+		const options = makeQuery('GET', `/blog/search?title=${exampleBlogPost.title}`, null);
 		request(options, function (error: any, response: any) {
 			expect(error).toBe(null);
+
 			const respBody = JSON.parse(response.body);
 			const { blogs } = respBody;
+
 			expect(Array.isArray(blogs)).toBe(true);
 			expect(blogs.includes(null)).toBe(false);
 			const firstPost = blogs[0];
@@ -59,17 +65,8 @@ describe('Search for a user using the BlogController', () => {
 		});
 	});
 
-	test('Test to see if the search is empty', (done) => {
-		let request = require('request');
-		let options = {
-			method: 'GET',
-			url: 'http://localhost:3000/blog/search',
-			headers: {
-				'Content-Type': 'application/json; charset=utf-8',
-				Accept: 'application/json'
-			}
-		};
-
+	test('Should return empty array when search is not passed any parameters', (done) => {
+		const options = makeQuery('GET', '/blog/search', null);
 		request(options, function (error: any, response: any) {
 			if (error) throw new Error(error);
 			const respBody = JSON.parse(response.body);
