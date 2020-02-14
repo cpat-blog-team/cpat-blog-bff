@@ -2,10 +2,19 @@ import { RequestHandler } from 'express';
 import handleErrorMiddleware from '../../middleware/handle-error-middleware';
 import Blog, { IBlog } from '../../models/Blog';
 
-const search: RequestHandler = async (req, res) => {
-	const { title } = req.query;
+const makeQuery = ({ query }: any) => {
+	let newQuery: any = {};
+	const { title, id } = query;
 
-	const query = { title };
+	if (title) newQuery.title = title;
+	if (id) newQuery._id = id;
+
+	return newQuery;
+};
+
+const search: RequestHandler = async (req, res) => {
+	const query = makeQuery(req);
+
 	let blogs: IBlog[] = [];
 
 	if (Object.entries(query).length > 0) {

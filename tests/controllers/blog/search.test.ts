@@ -1,4 +1,5 @@
 import * as BlogController from '../../../src/controllers/blog';
+import { IBlog } from '../../../src/models/Blog'
 const request = require('request');
 
 describe('Search for a user using the BlogController', () => {
@@ -33,7 +34,10 @@ describe('Search for a user using the BlogController', () => {
 		return query;
 	};
 
-	// wipe DB and seed with exampleBlogPost
+
+	let seededBlog: IBlog;
+
+	// wipe DB, seed with exampleBlogPost and store seeded blog in var "seededBlog"
 	beforeAll(async () => {
 		const wipeQuery = makeQuery('DELETE', '/dev/wipe', null);
 		await request(wipeQuery, (error: any, response: any) => {
@@ -42,6 +46,7 @@ describe('Search for a user using the BlogController', () => {
 		const addQuery = makeQuery('POST', '/blog/add', JSON.stringify(exampleBlogPost));
 		await request(addQuery, function (error: any, response: any) {
 			if (error) throw new Error(error);
+			seededBlog = JSON.parse(response.body).blog;
 		});
 	});
 
@@ -65,12 +70,28 @@ describe('Search for a user using the BlogController', () => {
 		});
 	});
 
+	test('Should return correct blog when searching by id', (done) => {
+		const options = makeQuery('GET', `/blog/search?id=${seededBlog._id}`, null);
+		request(options, function (error: any, response: any) {
+			expect(error).toBe(null);
+
+			const respBody = JSON.parse(response.body);
+			const { blogs } = respBody;
+
+			expect(Array.isArray(blogs)).toBe(true);
+			expect(blogs.includes(null)).toBe(false);
+			expect(blogs.length).toBe(1);
+			const firstPost = blogs[0];
+			expect(firstPost._id).toBe(seededBlog._id);
+			done();
+		});
+	});
+
 	test('Should return empty array when search is not passed any parameters', (done) => {
 		const options = makeQuery('GET', '/blog/search', null);
 		request(options, function (error: any, response: any) {
 			if (error) throw new Error(error);
 			const respBody = JSON.parse(response.body);
-
 			expect(respBody.blogs.length).toEqual(0);
 			done();
 		});
