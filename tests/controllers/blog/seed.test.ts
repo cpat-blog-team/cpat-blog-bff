@@ -1,9 +1,9 @@
 import * as BlogController from '../../../src/controllers/blogs';
 import request from 'request';
 
-describe('This tests the wipe method of blog controller', () => {
-  test('Controller should have property wipe', () => {
-    jest.spyOn(BlogController, 'wipe');
+describe('This tests the seed method of blog controller', () => {
+  test('Controller should have property seed', () => {
+    jest.spyOn(BlogController, 'seed');
   });
 
   test('Test to see if receive valid response from the controller', (done) => {
@@ -39,7 +39,7 @@ describe('This tests the wipe method of blog controller', () => {
 
       const options = {
         method: 'DELETE',
-        url: 'http://localhost:3000/dev/wipe',
+        url: 'http://localhost:3000/dev/seed',
         headers: {
           'Content-Type': 'application/json; charset=utf-8',
           Accept: 'application/json'

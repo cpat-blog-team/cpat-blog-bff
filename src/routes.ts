@@ -28,7 +28,7 @@ console.log('ENVIRONMENT:', process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'development') {
 	router.use('/dev/api-docs', swaggerUi.serve);
 	router.get('/dev/api-docs', swaggerUi.setup(apiSpec, swaggerUiOptions));
-	router.delete('/dev/wipe', BlogController.wipe);
+	router.delete('/dev/seed', BlogController.seed);
 }
 
 export default router;
