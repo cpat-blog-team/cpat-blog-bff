@@ -1,8 +1,9 @@
 import add from './add';
 import all from './all';
 import search from './search';
-import wipe from './wipe';
+import getById from './getById';
+import seed from './seed';
 
 export {
-	add, all, search, wipe
+	add, all, search, seed, getById
 };
