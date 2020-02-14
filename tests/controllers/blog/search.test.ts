@@ -1,5 +1,5 @@
 import * as BlogController from '../../../src/controllers/blog';
-import { IBlog } from '../../../src/models/Blog'
+import { IBlog } from '../../../src/models/Blog';
 const request = require('request');
 
 describe('Search for a user using the BlogController', () => {
@@ -34,19 +34,19 @@ describe('Search for a user using the BlogController', () => {
 		return query;
 	};
 
-
 	let seededBlog: IBlog;
 
 	// wipe DB, seed with exampleBlogPost and store seeded blog in var "seededBlog"
-	beforeAll(async () => {
+	beforeAll((done) => {
 		const wipeQuery = makeQuery('DELETE', '/dev/wipe', null);
-		await request(wipeQuery, (error: any, response: any) => {
+		request(wipeQuery, (error: any, response: any) => {
 			if (error) throw new Error(error);
-		});
-		const addQuery = makeQuery('POST', '/blog/add', JSON.stringify(exampleBlogPost));
-		await request(addQuery, function (error: any, response: any) {
-			if (error) throw new Error(error);
-			seededBlog = JSON.parse(response.body).blog;
+			const addQuery = makeQuery('POST', '/blog/add', JSON.stringify(exampleBlogPost));
+			request(addQuery, (error: any, response: any) => {
+				if (error) throw new Error(error);
+				seededBlog = JSON.parse(response.body).blog;
+				done();
+			});
 		});
 	});
 
