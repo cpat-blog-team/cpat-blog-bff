@@ -1,7 +1,6 @@
 import * as BlogController from '../../../src/controllers/blogs';
 import request from 'request-promise';
-import { examplePost, exampleList } from '../../utils/examplePost';
-import { makeQuery } from '../../utils/makeQuery';
+import { examplePost, exampleList, makeQuery } from '../../utils';
 
 describe('Seed method at endpoint "/dev/seed"', () => {
   let options;

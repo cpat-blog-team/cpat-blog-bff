@@ -1,6 +1,6 @@
 import * as BlogController from '../../../src/controllers/blogs';
 import request from 'request-promise';
-import { makeQuery } from '../../utils/makeQuery';
+import { makeQuery } from '../../utils';
 
 describe('This tests if you can receive all blogs using the BlogController', () => {
 	test('Test to see if all controller is exposed for endpoint', () => {

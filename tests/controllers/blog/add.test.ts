@@ -1,7 +1,7 @@
 import * as BlogController from '../../../src/controllers/blogs';
 import request from 'request-promise';
-import { examplePost } from '../../utils/examplePost';
-import { makeQuery } from '../../utils/makeQuery';
+import { examplePost, makeQuery } from '../../utils';
+
 
 describe('This tests if you can add a blog using the BlogController', () => {
 	test('Test to see if blog add controller is exposed for endpoint', () => {

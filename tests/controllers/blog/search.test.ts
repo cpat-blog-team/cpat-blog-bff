@@ -1,6 +1,6 @@
 import * as BlogController from '../../../src/controllers/blogs';
-import { examplePost } from '../../utils/examplePost';
-import { makeQuery } from '../../utils/makeQuery';
+import { examplePost, makeQuery } from '../../utils';
+
 import request from 'request-promise';
 
 describe('Search for a user using the BlogController', () => {
