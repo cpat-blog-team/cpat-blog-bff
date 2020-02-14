@@ -1,4 +1,4 @@
-import * as BlogController from '../../../src/controllers/blog';
+import * as BlogController from '../../../src/controllers/blogs';
 import { IBlog } from '../../../src/models/Blog';
 const request = require('request');
 
@@ -41,7 +41,7 @@ describe('Search for a user using the BlogController', () => {
 		const wipeQuery = makeQuery('DELETE', '/dev/wipe', null);
 		request(wipeQuery, (error: any, response: any) => {
 			if (error) throw new Error(error);
-			const addQuery = makeQuery('POST', '/blog/add', JSON.stringify(exampleBlogPost));
+			const addQuery = makeQuery('POST', '/blogs/add', JSON.stringify(exampleBlogPost));
 			request(addQuery, (error: any, response: any) => {
 				if (error) throw new Error(error);
 				seededBlog = JSON.parse(response.body).blog;
@@ -55,7 +55,7 @@ describe('Search for a user using the BlogController', () => {
 	});
 
 	test('Should return correct blog when searching by title', (done) => {
-		const options = makeQuery('GET', `/blog/search?title=${exampleBlogPost.title}`, null);
+		const options = makeQuery('GET', `/blogs/search?title=${exampleBlogPost.title}`, null);
 		request(options, function (error: any, response: any) {
 			expect(error).toBe(null);
 
@@ -71,7 +71,7 @@ describe('Search for a user using the BlogController', () => {
 	});
 
 	test('Should return correct blog when searching by id', (done) => {
-		const options = makeQuery('GET', `/blog/search?id=${seededBlog._id}`, null);
+		const options = makeQuery('GET', `/blogs/search?id=${seededBlog._id}`, null);
 		request(options, function (error: any, response: any) {
 			expect(error).toBe(null);
 
@@ -88,7 +88,7 @@ describe('Search for a user using the BlogController', () => {
 	});
 
 	test('Should return empty array when search is not passed any parameters', (done) => {
-		const options = makeQuery('GET', '/blog/search', null);
+		const options = makeQuery('GET', '/blogs/search', null);
 		request(options, function (error: any, response: any) {
 			if (error) throw new Error(error);
 			const respBody = JSON.parse(response.body);

@@ -1,7 +1,7 @@
-import * as BlogController from '../../../src/controllers/blog';
+import * as BlogController from '../../../src/controllers/blogs';
 const request = require('request');
 
-import { wipe } from '../../../src/controllers/blog/index';
+import { wipe } from '../../../src/controllers/blogs/index';
 
 describe('This tests the wipe method of blog controller', () => {
   test('Test to see if receive valid response from the controller', (done) => {
@@ -18,7 +18,7 @@ describe('This tests the wipe method of blog controller', () => {
 
     const options = {
       method: 'POST',
-      url: 'http://localhost:3000/blog/add',
+      url: 'http://localhost:3000/blogs/add',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
         Accept: 'application/json'
@@ -50,7 +50,7 @@ describe('This tests the wipe method of blog controller', () => {
 
         const options = {
           method: 'GET',
-          url: 'http://localhost:3000/blog/all',
+          url: 'http://localhost:3000/blogs/all',
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
             Accept: 'application/json'

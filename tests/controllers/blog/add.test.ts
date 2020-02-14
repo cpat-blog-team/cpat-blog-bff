@@ -1,4 +1,4 @@
-import * as BlogController from '../../../src/controllers/blog';
+import * as BlogController from '../../../src/controllers/blogs';
 
 describe('This tests if you can add a blog using the BlogController', () => {
 	test('Test to see if blog add controller is exposed for endpoint', () => {
@@ -20,7 +20,7 @@ describe('This tests if you can add a blog using the BlogController', () => {
 		let request = require('request');
 		let options = {
 			method: 'POST',
-			url: 'http://localhost:3000/blog/add',
+			url: 'http://localhost:3000/blogs/add',
 			headers: {
 				'Content-Type': 'application/json; charset=utf-8',
 				Accept: 'application/json'
