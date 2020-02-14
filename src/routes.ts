@@ -19,7 +19,8 @@ router.get('/user/all', UserController.all);
 // Blog routes 
 router.post('/blogs/add', BlogController.add);
 router.get('/blogs/search', BlogController.search);
-router.get('/blogs/all', BlogController.all);
+router.get('/blogs/:id', BlogController.getById);
+router.get('/blogs', BlogController.all);
 
 // Dev routes
 console.log('ENVIRONMENT:', process.env.NODE_ENV);

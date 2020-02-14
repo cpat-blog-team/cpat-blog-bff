@@ -1,9 +1,11 @@
 import * as BlogController from '../../../src/controllers/blogs';
-const request = require('request');
-
-import { wipe } from '../../../src/controllers/blogs/index';
+import request from 'request';
 
 describe('This tests the wipe method of blog controller', () => {
+  test('Controller should have property wipe', () => {
+    jest.spyOn(BlogController, 'wipe');
+  });
+
   test('Test to see if receive valid response from the controller', (done) => {
     const expectedJSON = {
       _id: '12345',
@@ -50,7 +52,7 @@ describe('This tests the wipe method of blog controller', () => {
 
         const options = {
           method: 'GET',
-          url: 'http://localhost:3000/blogs/all',
+          url: 'http://localhost:3000/blogs',
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
             Accept: 'application/json'

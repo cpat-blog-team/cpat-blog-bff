@@ -1,5 +1,5 @@
 import * as BlogController from '../../../src/controllers/blogs';
-const request = require('request');
+import request from 'request';
 
 describe('This tests if you can receive all blogs using the BlogController', () => {
 	test('Test to see if all controller is exposed for endpoint', () => {
@@ -9,7 +9,7 @@ describe('This tests if you can receive all blogs using the BlogController', () 
 	test('Test to see if receive valid response from the controller', (done) => {
 		let options = {
 			method: 'GET',
-			url: 'http://localhost:3000/blogs/all',
+			url: 'http://localhost:3000/blogs',
 			headers: {
 				'Content-Type': 'application/json; charset=utf-8',
 				Accept: 'application/json'
