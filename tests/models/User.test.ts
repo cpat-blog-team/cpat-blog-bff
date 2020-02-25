@@ -14,7 +14,7 @@ describe('test mongoose User model', () => {
 			name: 'test',
 			email: 'test@test.com',
 			password: 'test',
-			session_id: token,
+			sessionId: token,
 			updatedAt: currentDate,
 			createdAt: currentDate
 		};
