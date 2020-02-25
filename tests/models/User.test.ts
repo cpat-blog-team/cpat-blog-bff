@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken';
 
 describe('test mongoose User model', () => {
 	test('should return the doc with findById', () => {
-		const current_date = new Date().toISOString();
+		const currentDate = new Date().toISOString();
 		const token = jwt.sign({ data: 'foobar' }, 'secret');
 
 		const _doc = {
@@ -15,8 +15,8 @@ describe('test mongoose User model', () => {
 			email: 'test@test.com',
 			password: 'test',
 			session_id: token,
-			updated_at: current_date,
-			created_at: current_date
+			updatedAt: currentDate,
+			createdAt: currentDate
 		};
 
 		mockingoose(UserModel).toReturn(_doc, 'findOne');

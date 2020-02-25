@@ -4,7 +4,7 @@ import BlogModel from '../../src/models/Blog';
 
 describe('test mongoose User model', () => {
 	test('should return the doc with findById', () => {
-		const current_date = new Date().toISOString();
+		const currentDate = new Date().toISOString();
 
 		const _doc = {
 			_id: '507f191e810c19729de860ea',
@@ -14,8 +14,8 @@ describe('test mongoose User model', () => {
 			summary: 'a story about space wizards',
 			content: 'obiwan is alive',
 			version: 0,
-			updated_at: current_date,
-			created_at: current_date
+			updatedAt: currentDate,
+			createdAt: currentDate
 		};
 
 		mockingoose(BlogModel).toReturn(_doc, 'findOne');
