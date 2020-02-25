@@ -7,11 +7,9 @@ export interface IBlog extends Document {
 	summary: string;
 	content: string;
 	version: number;
-	createdAt: Date;
-	updatedAt: Date;
 }
 
-interface IBlogModel extends Model<IBlog> { }
+interface IBlogModel extends Model<IBlog> {}
 
 const schema = new Schema({
 	userId: { type: String, required: true },
@@ -20,8 +18,8 @@ const schema = new Schema({
 	summary: { type: String, required: true },
 	content: { type: String, required: true },
 	version: { type: Number, required: true },
-	createdAt: { type: Date, required: false },
-	updatedAt: { type: Date, required: false }
+	created_at: { type: Date, required: false },
+	updated_at: { type: Date, required: false }
 });
 
 const Blog: IBlogModel = model<IBlog, IBlogModel>('Blog', schema);

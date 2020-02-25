@@ -11,7 +11,10 @@ interface IUserModel extends Model<IUser> {}
 const schema = new Schema({
 	name: { type: String, required: true },
 	email: { type: String, required: true },
-	password: { type: String, required: true }
+	password: { type: String, required: true },
+	session_id: { type: String, required: false },
+	created_at: { type: Date, required: false },
+	updated_at: { type: Date, required: false }
 });
 
 const User: IUserModel = model<IUser, IUserModel>('User', schema);
