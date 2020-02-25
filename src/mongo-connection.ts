@@ -23,10 +23,10 @@ export default class MongoConnection {
 	/** Callback when mongo connection is established or re-established */
 	private onConnectedCallback: IOnConnectedCallback;
 
-  /**
-   * Internal flag to check if connection established for
-   * first time or after a disconnection
-   */
+	/**
+	 * Internal flag to check if connection established for
+	 * first time or after a disconnection
+	 */
 	private isConnectedBefore: boolean = false;
 
 	/** Mongo connection options to be passed Mongoose */
@@ -36,11 +36,11 @@ export default class MongoConnection {
 		useUnifiedTopology: true
 	};
 
-  /**
-   * Start mongo connection
-   * @param mongoUrl MongoDB URL
-   * @param onConnectedCallback callback to be called when mongo connection is successful
-   */
+	/**
+	 * Start mongo connection
+	 * @param mongoUrl MongoDB URL
+	 * @param onConnectedCallback callback to be called when mongo connection is successful
+	 */
 	constructor(mongoUrl: string) {
 		if (process.env.NODE_ENV === 'development') {
 			mongoose.set('debug', true);
@@ -74,12 +74,14 @@ export default class MongoConnection {
 			level: 'info',
 			message: `Connecting to MongoDB at ${this.mongoUrl}`
 		});
-		mongoose.connect(this.mongoUrl, this.mongoConnectionOptions).catch(() => { });
-	}
+		mongoose
+			.connect(this.mongoUrl, this.mongoConnectionOptions)
+			.catch(() => {});
+	};
 
-  /**
-   * Handler called when mongo connection is established
-   */
+	/**
+	 * Handler called when mongo connection is established
+	 */
 	private onConnected = () => {
 		logger.log({
 			level: 'info',

@@ -8,11 +8,15 @@ export interface IUser extends Document {
 
 interface IUserModel extends Model<IUser> {}
 
-const schema = new Schema({
-	name: { type: String, required: true },
-	email: { type: String, required: true },
-	password: { type: String, required: true }
-});
+const schema = new Schema(
+	{
+		name: { type: String, required: true },
+		email: { type: String, required: true },
+		password: { type: String, required: true },
+		sessionId: { type: String, required: false }
+	},
+	{ timestamps: true }
+);
 
 const User: IUserModel = model<IUser, IUserModel>('User', schema);
 
