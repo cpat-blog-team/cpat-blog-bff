@@ -1,20 +1,20 @@
 import { Document, Model, Schema, model } from 'mongoose';
 
 export interface IBlog extends Document {
-	userId: string;
-	username: string;
+	name: string;
+	email: string;
 	title: string;
 	summary: string;
 	content: string;
 	version: number;
 }
 
-interface IBlogModel extends Model<IBlog> {}
+interface IBlogModel extends Model<IBlog> { }
 
 const schema = new Schema(
 	{
-		userId: { type: String, required: true },
-		username: { type: String, required: true },
+		name: { type: String, required: true },
+		email: { type: String, required: true },
 		title: { type: String, required: true },
 		summary: { type: String, required: true },
 		content: { type: String, required: true },
