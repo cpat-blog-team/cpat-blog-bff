@@ -1,6 +1,6 @@
 interface Post {
-  username: string;
-  userId: string;
+  name: string;
+  email: string;
   title: string;
   summary: string;
   content: string;
@@ -8,8 +8,8 @@ interface Post {
 };
 
 export const examplePost: Post = {
-  userId: '1',
-  username: 'bob',
+  email: 'bob@bob.com',
+  name: 'bob',
   title: 'bobs blog',
   summary: 'bobs summary',
   content: 'bobs content',
