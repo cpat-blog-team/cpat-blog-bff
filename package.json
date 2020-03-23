@@ -22,10 +22,9 @@
 		"lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts",
 		"dev": "NODE_ENV=development ./scripts/dev.sh",
 		"start": "ts-node ./src/server.ts",
-		"test": "npm-run-all --parallel test-jest test-script",
-		"test-script": "./scripts/test.sh",
-		"test-jest": "sleep 30; jest",
+		"test": "jest --runInBand --coverage",
 		"tdd": "jest --watch --runInBand --coverage",
+		"forever": "forever -c ts-node ./src/server.ts",
 		"fix-lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts --fix"
 	},
 	"dependencies": {
@@ -59,6 +58,7 @@
 		"eslint-config-airbnb-base": "14.0.0",
 		"eslint-plugin-import": "2.20.0",
 		"eslint-plugin-prettier": "^3.1.2",
+		"forever": "^2.0.0",
 		"jest": "25.1.0",
 		"jest-express": "1.11.0",
 		"mockingoose": "2.13.2",
