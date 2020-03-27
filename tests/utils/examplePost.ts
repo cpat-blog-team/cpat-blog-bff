@@ -7,6 +7,7 @@ interface Post {
   summary: string;
   content: string;
   version: number;
+  date: string
 };
 
 export const examplePost: Post = {
@@ -15,7 +16,8 @@ export const examplePost: Post = {
   title: 'bobs blog',
   summary: 'bobs summary',
   content: JSON.stringify(new Delta([{ insert: 'bobs content' }])),
-  version: 1
+  version: 1,
+  date: new Date().toDateString()
 };
 
 const numberedPost = (number: number) => ({
@@ -24,7 +26,8 @@ const numberedPost = (number: number) => ({
   title: `bobs blog ${number}`,
   summary: 'bobs summary',
   content: JSON.stringify(new Delta([{ insert: 'bobs content' }])),
-  version: 1
+  version: 1,
+  date: new Date().toDateString()
 });
 
 export const exampleList = (numberOfPosts: number) => {
