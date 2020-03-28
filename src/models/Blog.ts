@@ -7,6 +7,7 @@ export interface IBlog extends Document {
 	summary: string;
 	content: string;
 	version: number;
+	date: string;
 }
 
 interface IBlogModel extends Model<IBlog> { }
@@ -18,7 +19,8 @@ const schema = new Schema(
 		title: { type: String, required: true },
 		summary: { type: String, required: true },
 		content: { type: String, required: true },
-		version: { type: Number, required: true }
+		version: { type: Number, required: true },
+		date: { type: String, required: true }
 	},
 	{ timestamps: true }
 );
