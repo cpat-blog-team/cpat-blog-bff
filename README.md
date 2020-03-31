@@ -14,7 +14,7 @@
 </a>
 
 # CPAT Blog BFF (backend-for-frontend) 
-The back end for a blogging web app to foster growth amongst the IBM CPAT team via the sharing of information. 
+The back end for a blogging web app to foster growth amongst the IBM CPAT team. The CPAT Blog project provides a platform for knowledge sharing. 
 
 ## Getting Started / Installation Instructions
 
