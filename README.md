@@ -13,55 +13,17 @@
   <img src="https://snyk.io//test/github/sidhantpanda/docker-express-typescript-boilerplate/badge.svg?targetFile=package.json" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io//test/github/sidhantpanda/docker-express-typescript-boilerplate?targetFile=package.json" style="max-width:100%;">
 </a>
 
-# Technical Debt
+# CPAT Blog BFF (backend-for-frontend) 
+The back end for a blogging web app to foster growth amongst the IBM CPAT team via the sharing of information. 
 
-1. Fix eslint
-2. Add more unit test for controllers
-3. Create and configure test enviorment
-4. Add created_at, deleted_at, updated_at, User session_id (should be hash) columns
-5. Instead of userId, send user email for controllers 
-6. Convert mongoose to TypeORM? 
+## Getting Started / Installation Instructions
 
-# Prereq Instructions
-
-Install:
-
-1. https://www.npmjs.com/package/ts-node
-2. Jest
-3. Docker
-
-# Express TypeScript Boilerplate
-
-This repo can be used as a starting point for backend development with Nodejs. It comes bundled with Docker and is CI/CD optimized. The development environment uses `docker-compose` to start dependent services like mongo.
-
-A few things to note in the project:
-
-- **[Dockerfile](https://github.com/sidhantpanda/docker-express-typescript-boilerplate/blob/master/Dockerfile)** - Dockerfile to generate docker builds.
-- **[docker-compose](https://github.com/sidhantpanda/docker-express-typescript-boilerplate/blob/master/docker-compose.yml)** - Docker compose script to start service in production mode.
-- **[Containerized Mongo for development](#development)** - Starts a local mongo container with data persistence across runs.
-- **[Mongo Connection Helper](https://github.com/sidhantpanda/docker-express-typescript-boilerplate/blob/master/src/mongo-connection.ts)** - A helper class to connect to MongoDB reliably.
-- **[Middleware for easier async/await](https://github.com/sidhantpanda/docker-express-typescript-boilerplate/blob/master/src/middleware/handle-error-middleware.ts)** - Catches errors from routes and throws them to express error handler to prevent app crash due to uncaught errors.
-- **[OpenAPI 3.0 Spec](https://github.com/sidhantpanda/docker-express-typescript-boilerplate/blob/master/openapi.json)** - A starter template to get started with API documentation using OpenAPI 3.0. This API spec is also available when running the development server at `http://localhost:3000/dev/api-docs`
-- **[.env file for configuration](#environment)** - Change server config like app port, mongo url etc
-- **[Winston Logger](#logging)** - Uses winston as the logger for the application.
-- **ESLINT** - ESLINT is configured for linting.
-- **Jest** - Using Jest for running test cases
-- **Travis CI** - Pre-configured to a sample Travis CI pipepline for linting, building and running the test suite.
-
-## Installation
-
-### Using `curl`
-
-```
-$ bash <(curl -s https://raw.githubusercontent.com/sidhantpanda/public/master/scripts/generate-express-ts-app.sh)
-```
-
-### Manual Method
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 #### 1. Clone this repo
 
 ```
-$ git clone git@github.com:sidhantpanda/docker-express-typescript-boilerplate.git your-app-name
+$ git clone https://github.com/cpat-blog-team/cpat-blog-bff your-app-name
 $ cd your-app-name
 ```
 
@@ -108,62 +70,3 @@ $ docker run -t -i -p 3000:3000 api-server
 $ npm run build && npm run start
 ```
 
----
-
-## Environment
-
-To edit environment variables, create a file with name `.env` and copy the contents from `.env.default` to start with.
-
-| Var Name  | Type   | Default                           | Description                            |
-| --------- | ------ | --------------------------------- | -------------------------------------- |
-| NODE_ENV  | string | `development`                     | API runtime environment. eg: `staging` |
-| PORT      | number | `3000`                            | Port to run the API server on          |
-| MONGO_URL | string | `mongodb://localhost:27017/books` | URL for MongoDB                        |
-
-## Logging
-
-The application uses [winston](https://github.com/winstonjs/winston) as the default logger. The configuration file is at `src/logger.ts`.
-
-- All logs are saved in `./logs` directory and at `/logs` in the docker container.
-- The `docker-compose` file has a volume attached to container to expose host directory to the container for writing logs.
-- Console messages are prettified
-- Each line in error log file is a stringified JSON.
-
-### Directory Structure
-
-```
-+-- scripts
-|   +-- dev.sh
-+-- src
-|   +-- controllers
-|   |   +-- book
-|   |   |   +-- add.ts
-|   |   |   +-- all.ts
-|   |   |   +-- index.ts
-|   |   |   +-- search.ts
-|   +-- errors
-|   |   +-- index.ts
-|   +-- middleware
-|   |   +-- handle-error-middleware.ts
-|   +-- models
-|   |   +-- Book.ts
-|   +-- app.ts
-|   +-- mongo-connection.ts
-|   +-- routes.ts
-|   +-- server.ts
-+-- .env
-+-- .env.default
-+-- .eslintrc.json
-+-- .gitignore
-+-- .travis.yml
-+-- docker-compose.dev.yml
-+-- docker-compose.yml
-+-- Dockerfile
-+-- jest.config.js
-+-- nodemon.json
-+-- openapi.json
-+-- package-lock.json
-+-- package.json
-+-- README.md
-+-- tsconfig.json
-```
