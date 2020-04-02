@@ -25,7 +25,8 @@
 		"test": "jest --runInBand --coverage",
 		"tdd": "jest --watch --runInBand --coverage",
 		"forever": "forever -c ts-node ./src/server.ts",
-		"fix-lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts --fix"
+		"fix-lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts --fix",
+		"seed:demo": "node ./scripts/seedDemo.js"
 	},
 	"dependencies": {
 		"@types/jsonwebtoken": "^8.3.7",
