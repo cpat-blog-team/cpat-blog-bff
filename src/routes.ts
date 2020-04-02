@@ -16,7 +16,8 @@ router.post('/user/add', UserController.add);
 router.get('/user/search', UserController.search);
 router.get('/user/all', UserController.all);
 
-// Blog routes 
+// Blog routes
+router.post('/blogs/update', BlogController.update);
 router.post('/blogs/add', BlogController.add);
 router.get('/blogs/search', BlogController.search);
 router.get('/blogs/:id', BlogController.getById);

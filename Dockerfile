@@ -1,16 +1,10 @@
 FROM node:10
 
 # Add package file
-COPY package*.json ./
+COPY . . 
 
 # Install deps
-RUN npm i
-
-# Copy source
-COPY . .
-
-# Build dist
-RUN npm run build
+RUN npm install --only=prod
 
 # Expose port 3000
 EXPOSE 3000

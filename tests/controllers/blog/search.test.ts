@@ -29,6 +29,18 @@ describe('Search for a user using the BlogController', () => {
 		done();
 	});
 
+	test('Should return correct blog when searching by username', async (done) => {
+		const options = makeQuery('GET', `/blogs/search?username=${examplePost.name}`, null);
+		const respBody = JSON.parse(await request(options));
+		const { blogs } = respBody;
+
+		expect(Array.isArray(blogs)).toBe(true);
+		expect(blogs.includes(null)).toBe(false);
+		const [firstPost] = blogs;
+		expect(firstPost.title).toBe(examplePost.title);
+		done();
+	});
+
 	test('Should return empty array when search is not passed any parameters', async (done) => {
 		const options = makeQuery('GET', '/blogs/search', null);
 		const respBody = JSON.parse(await request(options));

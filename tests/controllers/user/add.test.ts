@@ -23,7 +23,7 @@ describe('This tests if you can add a user using the UserController', () => {
 			body: JSON.stringify(expectedJSON)
 		};
 
-		request(options, function (error: any, response: any) {
+		request(options, function(error: any, response: any) {
 			if (error) throw new Error(error);
 
 			const respBody = JSON.parse(response.body);

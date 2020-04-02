@@ -28,7 +28,7 @@ describe('Seed method at endpoint "/dev/seed"', () => {
     done();
   });
 
-  test('Should seed databse with array of blogs when passed in body', async (done) => {
+  test('Should seed database with array of blogs when passed in body', async (done) => {
     // deletes all documents in blogs
     const list = exampleList(5);
     options = makeQuery('POST', '/dev/seed', JSON.stringify({ blogs: list }));

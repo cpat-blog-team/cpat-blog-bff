@@ -3,9 +3,9 @@ import handleErrorMiddleware from '../../middleware/handle-error-middleware';
 import Blog from '../../models/Blog';
 
 const add: RequestHandler = async (req, res) => {
-	const { userId, username, title, summary, content, version, createdAt, updatedAt } = req.body;
-
-	const blog = new Blog({ userId, username, title, summary, content, version, createdAt, updatedAt });
+	const { name, email, title, summary, content, version, createdAt, updatedAt } = req.body;
+	const date = new Date().toDateString();
+	const blog = new Blog({ name, email, title, summary, content, version, createdAt, updatedAt, date });
 	await blog.save();
 
 	res.send({
