@@ -1,3 +1,12 @@
+/*
+  SEED DEMO SCRIPT
+  This script will wipe the db and seed it with 7 unique blogs. 
+  - Each post has its own user and unique title relevant to something a cpat'er may write about.
+  - The content of each post is 1 of two quill deltas stored in ./seedContent.json 
+      Both have styled laurem ispum and an image.
+*/
+
+
 const demoList = [
   {
     email: 'bob@ibm.com',
@@ -66,6 +75,16 @@ const seedDemo = async () => {
   demoList.forEach((blog) => {
     blog.content = JSON.stringify(content[Math.floor(Math.random() * 2)]);
   });
+
+  /*
+    MULTIPLE REQUESTS
+    The first request sends a post to the seed endpoint which accepts an array,
+    However we can only send the first 4 blogs in one request otherwise the request is too large
+    After the first request we can't make a request to the seed endpoint again 
+      otherwise it will wipe our previous request
+    And since our add blog route only supports adding one blog at a time currently, 
+      we just make individual queries to add the last 3 blogs.
+  */
 
   await request({
     method: 'POST',
