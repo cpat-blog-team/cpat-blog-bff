@@ -4,10 +4,11 @@ import Blog, { IBlog } from '../../models/Blog';
 
 const makeQuery = ({ query }: any) => {
 	let newQuery: any = {};
-	const { title, id } = query;
+	const { title, id, username } = query;
 
 	if (title) newQuery.title = title;
 	if (id) newQuery._id = id;
+	if (username) newQuery.name = username;
 
 	return newQuery;
 };
