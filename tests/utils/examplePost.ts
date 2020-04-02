@@ -1,6 +1,7 @@
 import Delta from 'quill-delta';
 
 interface Post {
+	name: string;
 	email: string;
 	title: string;
 	summary: string;
@@ -10,8 +11,8 @@ interface Post {
 }
 
 export const examplePost: Post = {
-	_id: '5e862cbb840e0c981fe08b50',
-	email: 'bob',
+	email: 'bob@bob.com',
+	name: 'bob',
 	title: 'bobs blog',
 	summary: 'bobs summary',
 	content: JSON.stringify(new Delta([{ insert: 'bobs content' }])),
