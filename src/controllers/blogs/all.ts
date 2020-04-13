@@ -3,7 +3,8 @@ import handleErrorMiddleware from '../../middleware/handle-error-middleware';
 import Blog from '../../models/Blog';
 
 const all: RequestHandler = async (req, res) => {
-	const blogs = await (await Blog.find()).reverse();
+	let blogs = await Blog.find();
+	blogs = blogs.reverse();
 	res.send({ blogs });
 };
 

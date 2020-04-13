@@ -5,9 +5,7 @@ import apiSpec from '../openapi.json';
 import * as UserController from './controllers/user';
 import * as BlogController from './controllers/blogs';
 
-const swaggerUiOptions = {
-	customCss: '.swagger-ui .topbar { display: none }'
-};
+const swaggerUiOptions = { customCss: '.swagger-ui .topbar { display: none }' };
 
 const router = Router();
 
@@ -21,6 +19,7 @@ router.post('/blogs/update', BlogController.update);
 router.post('/blogs/add', BlogController.add);
 router.get('/blogs/search', BlogController.search);
 router.get('/blogs/:id', BlogController.getById);
+router.delete('/blogs/:id', BlogController.deleteById);
 router.get('/blogs', BlogController.all);
 
 // Dev routes
