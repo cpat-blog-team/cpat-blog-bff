@@ -4,6 +4,7 @@ import apiSpec from '../openapi.json';
 
 import * as UserController from './controllers/user';
 import * as BlogController from './controllers/blogs';
+import * as communityGuidelinesController from './controllers/communityGuidelines';
 
 const swaggerUiOptions = { customCss: '.swagger-ui .topbar { display: none }' };
 
@@ -21,6 +22,9 @@ router.get('/blogs/search', BlogController.search);
 router.get('/blogs/:id', BlogController.getById);
 router.delete('/blogs/:id', BlogController.deleteById);
 router.get('/blogs', BlogController.all);
+
+// Community Guidelines routes
+router.post('/communityGuidelines', communityGuidelinesController.add);
 
 // Dev routes
 console.log('ENVIRONMENT:', process.env.NODE_ENV);
