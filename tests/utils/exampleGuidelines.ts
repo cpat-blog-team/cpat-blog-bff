@@ -1,6 +1,16 @@
 export const exampleGuidelines = {
   name: 'Bob',
   email: 'bob@Blob.com',
-  content: 'This is an example guideline',
+  content: JSON.stringify({
+    'ops': [
+      {
+        'attributes': {
+          'italic': true,
+          'bold': true
+        },
+        'insert': 'Nulla eget nunc dolor.'
+      }
+    ]
+  }),
   version: 0
 };
