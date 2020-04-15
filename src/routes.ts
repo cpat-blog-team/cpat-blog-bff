@@ -25,6 +25,7 @@ router.get('/blogs', BlogController.all);
 
 // Community Guidelines routes
 router.post('/communityGuidelines', communityGuidelinesController.add);
+router.get('/communityGuidelines', communityGuidelinesController.getLatest);
 
 // Dev routes
 console.log('ENVIRONMENT:', process.env.NODE_ENV);
