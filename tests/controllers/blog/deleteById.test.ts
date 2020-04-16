@@ -6,14 +6,12 @@ describe('Update blog posts through the BlogController', () => {
   let seededPosts: any;
 
   beforeAll(async (done) => {
-    // wipe DB, seed with examplePost and store seeded blog in var "seededBlog"
-    const seedQuery = makeQuery(
-      'POST',
-      '/dev/seed',
-      JSON.stringify({ blogs: exampleList(5) })
-    );
-
-    const { blogs } = JSON.parse(await request(seedQuery));
+    // wipe DB
+    await request(makeQuery('DELETE', '/dev/wipeDB', null));
+    // seed DB with exampleList
+    const res = await request(makeQuery('POST', '/dev/seedManyBlogs', JSON.stringify({ blogs: exampleList(5) })));
+    // store seeded blogs in var "seededBlog" for testing
+    const { blogs } = JSON.parse(res);
     seededPosts = blogs;
     done();
   });

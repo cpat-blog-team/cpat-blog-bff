@@ -18,9 +18,8 @@ describe('This tests if you can search for a user using the UserController', () 
 
 		request(options, function (error: any, response: any) {
 			if (error) throw new Error(error);
-			const respBody = JSON.parse(response.body);
-
-			expect(respBody.users.length).toBeLessThan(2);
+			const { users } = JSON.parse(response.body);
+			expect(users.length).toBeLessThan(2);
 			done();
 		});
 	});
