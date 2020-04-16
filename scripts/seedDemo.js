@@ -76,19 +76,20 @@ const seedDemo = async () => {
     blog.content = JSON.stringify(content[Math.floor(Math.random() * 2)]);
   });
 
-  /*
-    MULTIPLE REQUESTS
-    The first request sends a post to the seed endpoint which accepts an array,
-    However we can only send the first 4 blogs in one request otherwise the request is too large
-    After the first request we can't make a request to the seed endpoint again 
-      otherwise it will wipe our previous request
-    And since our add blog route only supports adding one blog at a time currently, 
-      we just make individual queries to add the last 3 blogs.
-  */
+  // wipe DB
+  await request({
+    method: 'DELETE',
+    url: 'http://localhost:3000/dev/wipeDB',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      Accept: 'application/json'
+    }
+  });
 
+  // seed first half of blogs
   await request({
     method: 'POST',
-    url: 'http://localhost:3000/dev/seed',
+    url: 'http://localhost:3000/dev/seedManyBlogs',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       Accept: 'application/json'
@@ -96,34 +97,26 @@ const seedDemo = async () => {
     body: JSON.stringify({ blogs: demoList.slice(0, 4) })
   });
 
+  // seed second half of blogs
   await request({
     method: 'POST',
-    url: 'http://localhost:3000/blogs/add',
+    url: 'http://localhost:3000/dev/seedManyBlogs',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       Accept: 'application/json'
     },
-    body: JSON.stringify(demoList[4])
+    body: JSON.stringify({ blogs: demoList.slice(4) })
   });
 
+  // seed community guidelines
   await request({
     method: 'POST',
-    url: 'http://localhost:3000/blogs/add',
+    url: 'http://localhost:3000/communityGuidelines',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       Accept: 'application/json'
     },
-    body: JSON.stringify(demoList[5])
-  });
-
-  await request({
-    method: 'POST',
-    url: 'http://localhost:3000/blogs/add',
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8',
-      Accept: 'application/json'
-    },
-    body: JSON.stringify(demoList[6])
+    body: JSON.stringify(demoList[0])
   });
 
   console.log('DB SEEDED FOR DEMO!');

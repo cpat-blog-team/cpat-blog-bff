@@ -16,11 +16,11 @@ describe('This tests if you can receive all users using the UserController', () 
 			}
 		};
 
-		request(options, function(error: any, response: any) {
+		request(options, function (error: any, response: any) {
 			if (error) throw new Error(error);
 
-			const respBody = JSON.parse(response.body);
-			expect(respBody.users).toBeInstanceOf(Array);
+			const { users } = JSON.parse(response.body);
+			expect(users).toBeInstanceOf(Array);
 			done();
 		});
 	});

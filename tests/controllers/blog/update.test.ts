@@ -6,14 +6,14 @@ describe('Update blog posts through the BlogController', () => {
 	let seededPost: any;
 
 	beforeAll(async (done) => {
-		// wipe DB, seed with examplePost and store seeded blog in var "seededBlog"
-		const options = makeQuery(
-			'POST',
-			'/dev/seed',
-			JSON.stringify({ blogs: [examplePost] })
-		);
-		const respBody = JSON.parse(await request(options));
-		seededPost = respBody.blogs.pop();
+		// wipe DB
+		await request(makeQuery('DELETE', '/dev/wipeDB', null));
+		// seed DB with examplePost
+		const query = makeQuery('POST', '/dev/seedManyBlogs', JSON.stringify({ blogs: [examplePost] }));
+		const res = await request(query);
+		// store seeded blogs in var "seededBlog" for testing
+		const { blogs } = JSON.parse(res);
+		seededPost = blogs[0];
 		done();
 	});
 
@@ -22,26 +22,18 @@ describe('Update blog posts through the BlogController', () => {
 	});
 
 	test('Test to see if receive valid response from the controller will update the version by 1', async (done) => {
-		const options = makeQuery(
-			'POST',
-			'/blogs/update',
-			JSON.stringify(seededPost)
-		);
-		const respBody = JSON.parse(await request(options));
-		expect(respBody.blog.version).toBe(seededPost.version + 1);
+		const query = makeQuery('POST', '/blogs/update', JSON.stringify(seededPost));
+		const { blog } = JSON.parse(await request(query));
+		expect(blog.version).toBe(seededPost.version + 1);
 		done();
 	});
 
 	test('Test to see if receive valid response from the controller', async (done) => {
-		const options = makeQuery(
-			'POST',
-			'/blogs/update',
-			JSON.stringify(seededPost)
-		);
-		const respBody = JSON.parse(await request(options));
-		expect(typeof respBody.blog).toBe('object');
+		const query = makeQuery('POST', '/blogs/update', JSON.stringify(seededPost));
+		const { blog } = JSON.parse(await request(query));
+		expect(typeof blog).toBe('object');
 		Object.keys(seededPost).forEach((property) => {
-			expect(respBody.blog).toHaveProperty(property);
+			expect(blog).toHaveProperty(property);
 		});
 		done();
 	});
@@ -49,52 +41,40 @@ describe('Update blog posts through the BlogController', () => {
 	test('Test to see if receive valid response from the controller will update the content', async (done) => {
 		const oldContent = seededPost.content;
 		seededPost.content = 'I was changed by a test!';
-		const options = makeQuery(
-			'POST',
-			'/blogs/update',
-			JSON.stringify(seededPost)
-		);
-		const respBody = JSON.parse(await request(options));
-		expect(respBody.blog.content).not.toBe(oldContent);
+		const query = makeQuery('POST', '/blogs/update', JSON.stringify(seededPost));
+
+		const { blog } = JSON.parse(await request(query));
+		expect(blog.content).not.toBe(oldContent);
 		done();
 	});
 
 	test('Test to see if receive valid response from the controller will update the summary', async (done) => {
 		const oldSummary = seededPost.summary;
 		seededPost.summary = 'I was changed by a test!';
-		const options = makeQuery(
-			'POST',
-			'/blogs/update',
-			JSON.stringify(seededPost)
-		);
-		const respBody = JSON.parse(await request(options));
-		expect(respBody.blog.summary).not.toBe(oldSummary);
+		const query = makeQuery('POST', '/blogs/update', JSON.stringify(seededPost));
+
+		const { blog } = JSON.parse(await request(query));
+		expect(blog.summary).not.toBe(oldSummary);
 		done();
 	});
 
 	test('Test to see if receive valid response from the controller will update the title', async (done) => {
 		const oldTitle = seededPost.title;
 		seededPost.title = 'I was changed by a test!';
-		const options = makeQuery(
-			'POST',
-			'/blogs/update',
-			JSON.stringify(seededPost)
-		);
-		const respBody = JSON.parse(await request(options));
-		expect(respBody.blog.title).not.toBe(oldTitle);
+		const query = makeQuery('POST', '/blogs/update', JSON.stringify(seededPost));
+
+		const { blog } = JSON.parse(await request(query));
+		expect(blog.title).not.toBe(oldTitle);
 		done();
 	});
 
 	test('Test to see if that the endpoint can not change the email on a blog post', async (done) => {
 		const oldEmail = seededPost.email;
 		seededPost.email = 'bruce banner';
-		const options = makeQuery(
-			'POST',
-			'/blogs/update',
-			JSON.stringify(seededPost)
-		);
-		const respBody = JSON.parse(await request(options));
-		expect(respBody.blog.email).toBe(oldEmail);
+		const query = makeQuery('POST', '/blogs/update', JSON.stringify(seededPost));
+
+		const { blog } = JSON.parse(await request(query));
+		expect(blog.email).toBe(oldEmail);
 		done();
 	});
 });

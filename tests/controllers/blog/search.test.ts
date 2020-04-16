@@ -4,12 +4,12 @@ import { examplePost, makeQuery } from '../../utils';
 import request from 'request-promise';
 
 describe('Search for a user using the BlogController', () => {
-	let options;
-
 	beforeAll(async (done) => {
-		// wipe DB, seed with examplePost
-		options = makeQuery('POST', '/dev/seed', JSON.stringify({ blogs: [examplePost] }));
-		await request(options);
+		// wipe DB
+		await request(makeQuery('DELETE', '/dev/wipeDB', null));
+		// seed DB with exampleList
+		const query = makeQuery('POST', '/dev/seedManyBlogs', JSON.stringify({ blogs: [examplePost] }));
+		const res = await request(query);
 		done();
 	});
 
@@ -18,9 +18,8 @@ describe('Search for a user using the BlogController', () => {
 	});
 
 	test('Should return correct blog when searching by title', async (done) => {
-		const options = makeQuery('GET', `/blogs/search?title=${examplePost.title}`, null);
-		const respBody = JSON.parse(await request(options));
-		const { blogs } = respBody;
+		const query = makeQuery('GET', `/blogs/search?title=${examplePost.title}`, null);
+		const { blogs } = JSON.parse(await request(query));
 
 		expect(Array.isArray(blogs)).toBe(true);
 		expect(blogs.includes(null)).toBe(false);
@@ -30,9 +29,8 @@ describe('Search for a user using the BlogController', () => {
 	});
 
 	test('Should return correct blog when searching by username', async (done) => {
-		const options = makeQuery('GET', `/blogs/search?username=${examplePost.name}`, null);
-		const respBody = JSON.parse(await request(options));
-		const { blogs } = respBody;
+		const query = makeQuery('GET', `/blogs/search?username=${examplePost.name}`, null);
+		const { blogs } = JSON.parse(await request(query));
 
 		expect(Array.isArray(blogs)).toBe(true);
 		expect(blogs.includes(null)).toBe(false);
@@ -42,9 +40,9 @@ describe('Search for a user using the BlogController', () => {
 	});
 
 	test('Should return empty array when search is not passed any parameters', async (done) => {
-		const options = makeQuery('GET', '/blogs/search', null);
-		const respBody = JSON.parse(await request(options));
-		expect(respBody.blogs.length).toEqual(0);
+		const query = makeQuery('GET', '/blogs/search', null);
+		const { blogs } = JSON.parse(await request(query));
+		expect(blogs.length).toEqual(0);
 		done();
 	});
 });

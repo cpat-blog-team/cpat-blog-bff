@@ -9,11 +9,10 @@ describe('This tests if you can add a blog using the BlogController', () => {
 	});
 
 	test('Test to see if receive valid response from the controller', async (done) => {
-		const options = makeQuery('POST', '/blogs/add', JSON.stringify(examplePost));
-		const respBody = JSON.parse(await request(options));
-		expect(typeof respBody.blog).toBe('object');
+		const { blog } = JSON.parse(await request(makeQuery('POST', '/blogs/add', JSON.stringify(examplePost))));
+		expect(typeof blog).toBe('object');
 		Object.keys(examplePost).forEach((property) => {
-			expect(respBody.blog).toHaveProperty(property);
+			expect(blog).toHaveProperty(property);
 		});
 		done();
 	});

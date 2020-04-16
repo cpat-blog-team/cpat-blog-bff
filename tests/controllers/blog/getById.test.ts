@@ -6,14 +6,13 @@ describe('Update blog posts through the BlogController', () => {
   let seededPosts: any;
 
   beforeAll(async (done) => {
-    // wipe DB, seed with examplePost and store seeded blog in var "seededBlog"
-    const seedQuery = makeQuery(
-      'POST',
-      '/dev/seed',
-      JSON.stringify({ blogs: exampleList(5) })
-    );
-
-    const { blogs } = JSON.parse(await request(seedQuery));
+    // wipe DB
+    await request(makeQuery('DELETE', '/dev/wipeDB', null));
+    // seed DB with exampleList
+    const query = makeQuery('POST', '/dev/seedManyBlogs', JSON.stringify({ blogs: exampleList(5) }));
+    const res = await request(query);
+    // store seeded blogs in var "seededBlog" for testing
+    const { blogs } = JSON.parse(res);
     seededPosts = blogs;
     done();
   });
@@ -24,17 +23,13 @@ describe('Update blog posts through the BlogController', () => {
 
   test('Should respond with correct blog when passed valid ID', async (done) => {
     const { _id, title } = seededPosts[0];
-    const getByIdQuery = makeQuery('GET', `/blogs/${_id}`, null);
-
-    const { blog } = JSON.parse(await request(getByIdQuery));
+    const { blog } = JSON.parse(await request(makeQuery('GET', `/blogs/${_id}`, null)));
     expect(blog.title).toBe(title);
     done();
   });
 
   test('Should respond with null when passed invalid title', async (done) => {
-    const getByIdQuery = makeQuery('GET', '/blogs/<invalid id>', null);
-
-    const { blog } = JSON.parse(await request(getByIdQuery));
+    const { blog } = JSON.parse(await request(makeQuery('GET', '/blogs/<invalid id>', null)));
     expect(blog).toBe(null);
     done();
   });

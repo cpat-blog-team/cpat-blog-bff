@@ -4,7 +4,8 @@ import apiSpec from '../openapi.json';
 
 import * as UserController from './controllers/user';
 import * as BlogController from './controllers/blogs';
-import * as communityGuidelinesController from './controllers/communityGuidelines';
+import * as CommunityGuidelinesController from './controllers/communityGuidelines';
+import * as SeedController from './controllers/seed';
 
 const swaggerUiOptions = { customCss: '.swagger-ui .topbar { display: none }' };
 
@@ -24,8 +25,8 @@ router.delete('/blogs/:id', BlogController.deleteById);
 router.get('/blogs', BlogController.all);
 
 // Community Guidelines routes
-router.post('/communityGuidelines', communityGuidelinesController.add);
-router.get('/communityGuidelines', communityGuidelinesController.getLatest);
+router.post('/communityGuidelines', CommunityGuidelinesController.add);
+router.get('/communityGuidelines', CommunityGuidelinesController.getLatest);
 
 // Dev routes
 console.log('ENVIRONMENT:', process.env.NODE_ENV);
@@ -33,7 +34,8 @@ console.log('ENVIRONMENT:', process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'development') {
 	router.use('/dev/api-docs', swaggerUi.serve);
 	router.get('/dev/api-docs', swaggerUi.setup(apiSpec, swaggerUiOptions));
-	router.post('/dev/seed', BlogController.seed);
+	router.post('/dev/seedManyBlogs', SeedController.seedManyBlogs);
+	router.delete('/dev/wipeDB', SeedController.wipeDB);
 }
 
 export default router;

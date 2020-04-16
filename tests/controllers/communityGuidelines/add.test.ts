@@ -10,10 +10,10 @@ describe('This tests if you can add communityGuidelines using the CommunityGuide
 
   test('Test to see if receive valid response from the controller', async (done) => {
     const options = makeQuery('POST', '/communityGuidelines', JSON.stringify(exampleGuidelines));
-    const respBody = JSON.parse(await request(options));
-    expect(typeof respBody.communityGuidelines).toBe('object');
+    const { communityGuidelines } = JSON.parse(await request(options));
+    expect(typeof communityGuidelines).toBe('object');
     Object.keys(exampleGuidelines).forEach((property) => {
-      expect(respBody.communityGuidelines).toHaveProperty(property);
+      expect(communityGuidelines).toHaveProperty(property);
     });
     done();
   });
