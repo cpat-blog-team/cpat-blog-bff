@@ -30,8 +30,7 @@
 	},
 	"husky": {
 		"hooks": {
-			"pre-commit": "npm test",
-			"pre-push": "docker-compose -f docker-compose.test.yml up -d && sleep 15 && npm test && docker-compose down"
+			"pre-push": "npm test"
 		}
 	},
 	"dependencies": {
