@@ -22,7 +22,7 @@
 		"lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts",
 		"dev": "NODE_ENV=development ./scripts/dev.sh",
 		"start": "ts-node ./src/server.ts",
-		"test": "jest --runInBand --coverage",
+		"test": "NODE_ENV=development ./scripts/test.sh",
 		"tdd": "jest --watch --runInBand --coverage",
 		"forever": "forever -c ts-node ./src/server.ts",
 		"fix-lint": "./node_modules/eslint/bin/eslint.js  src --ext .ts --fix",
@@ -30,8 +30,8 @@
 	},
 	"husky": {
 		"hooks": {
-		  "pre-commit": "npm test",
-		  "pre-push": "npm test"
+			"pre-commit": "npm test",
+			"pre-push": "docker-compose -f docker-compose.test.yml up -d && sleep 15 && npm test && docker-compose down"
 		}
 	},
 	"dependencies": {

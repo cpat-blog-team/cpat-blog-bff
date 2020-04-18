@@ -1,17 +1,22 @@
-version: '3'
-
+version: '2'
 services:
-  mongo-dev:
-    image: mongo
-    container_name: mongo-dev
-    restart: always
-    networks:
-      - dev-network
-    volumes:
-      - ./data/dev/mongo:/data/db
+  mongodb:
+    image: bitnami/mongodb:latest
     ports:
       - '27017:27017'
+  web:
+    image: node:latest
+    volumes:
+      - ./:/usr/src/app
+    working_dir: /usr/src/app
+    command: npm start
+    environment:
+      - NODE_ENV=development
+      - MONGO_URL=mongodb://mongodb:27017/blog
+    ports:
+      - '3000:3000'
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
 
-networks:
-  dev-network:
-    driver: bridge
