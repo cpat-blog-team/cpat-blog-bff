@@ -4,6 +4,12 @@ import { makeQuery, exampleGuidelines } from '../../utils';
 
 
 describe('This tests if you can add communityGuidelines using the CommunityGuidelinesController', () => {
+  beforeAll(async (done) => {
+    // wipe DB
+    await request(makeQuery('DELETE', '/dev/wipeDB', null));
+    done();
+  });
+
   test('Test to see if CommunityGuidelines add controller is exposed for endpoint', () => {
     jest.spyOn(CommunityGuidelinesController, 'add');
   });

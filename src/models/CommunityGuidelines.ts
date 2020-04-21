@@ -1,24 +1,30 @@
 import { Document, Model, Schema, model } from 'mongoose';
 
-export interface ICommunityGuidelines extends Document {
+export interface ICommunityGuidelines {
   name: string;
   email: string;
   content: string;
   version: number;
+  date: string;
 }
 
-interface ICommunityGuidelinesModel extends Model<ICommunityGuidelines> { }
+interface ICommunityGuidelinesDocument extends Document, ICommunityGuidelines {
+  title: string;
+}
+interface ICommunityGuidelinesModel extends Model<ICommunityGuidelinesDocument> { }
 
 export const schema = new Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true },
     content: { type: String, required: true },
-    version: { type: Number, required: true }
+    version: { type: Number, required: true },
+    date: { type: String, required: true },
+    title: { type: String, required: true }
   },
   { timestamps: true }
 );
 
-const CommunityGuidelines: ICommunityGuidelinesModel = model<ICommunityGuidelines, ICommunityGuidelinesModel>('CommunityGuidelines', schema);
+const CommunityGuidelines: ICommunityGuidelinesModel = model<ICommunityGuidelinesDocument, ICommunityGuidelinesModel>('CommunityGuidelines', schema);
 
 export default CommunityGuidelines;
