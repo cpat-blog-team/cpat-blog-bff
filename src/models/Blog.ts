@@ -1,6 +1,6 @@
 import { Document, Model, Schema, model } from 'mongoose';
 
-export interface IBlog extends Document {
+export interface IBlog {
 	name: string;
 	email: string;
 	title: string;
@@ -8,10 +8,18 @@ export interface IBlog extends Document {
 	content: string;
 	version: number;
 	date: string;
-	approved: boolean;
+	approved: ApprovalStatus;
+	comments: string[];
 }
 
-interface IBlogModel extends Model<IBlog> { }
+interface IBlogDocument extends Document, IBlog { }
+interface IBlogModel extends Model<IBlogDocument> { }
+
+export enum ApprovalStatus {
+	Pending = 'Pending',
+	Approved = 'Approved',
+	Rejected = 'Rejected'
+}
 
 export const schema = new Schema(
 	{
@@ -22,11 +30,12 @@ export const schema = new Schema(
 		content: { type: String, required: true },
 		version: { type: Number, required: true },
 		date: { type: String, required: true },
-		approved: { type: Boolean, required: true }
+		approved: { type: ApprovalStatus, required: true, default: 'Pending' },
+		comments: { type: Array, required: false, default: [] }
 	},
 	{ timestamps: true }
 );
 
-const Blog: IBlogModel = model<IBlog, IBlogModel>('Blog', schema);
+const Blog: IBlogModel = model<IBlogDocument, IBlogModel>('Blog', schema);
 
 export default Blog;

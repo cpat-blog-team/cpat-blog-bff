@@ -1,17 +1,7 @@
 import Delta from 'quill-delta';
+import { IBlog, ApprovalStatus } from '../../src/models/Blog';
 
-interface Post {
-	name: string;
-	email: string;
-	title: string;
-	summary: string;
-	content: string;
-	version: number;
-	date: string;
-	approved: boolean;
-}
-
-export const examplePost: Post = {
+export const examplePost: IBlog = {
 	email: 'bob@bob.com',
 	name: 'bob',
 	title: 'bobs blog',
@@ -19,7 +9,8 @@ export const examplePost: Post = {
 	content: JSON.stringify(new Delta([{ insert: 'bobs content' }])),
 	version: 1,
 	date: new Date().toDateString(),
-	approved: false
+	approved: 'Pending' as ApprovalStatus,
+	comments: [] as string[]	
 };
 
 const numberedPost = (number: number) => ({
@@ -30,11 +21,12 @@ const numberedPost = (number: number) => ({
 	content: JSON.stringify(new Delta([{ insert: 'bobs content' }])),
 	version: 1,
 	date: new Date().toDateString(),
-	approved: false
+	approved: 'Pending' as ApprovalStatus,
+	comments: [] as string[]
 });
 
 export const exampleList = (numberOfPosts: number) => {
-	const list: Post[] = [];
+	const list: IBlog[] = [];
 
 	for (let c = 0; c < numberOfPosts; c++) {
 		list.push(numberedPost(c));

@@ -79,12 +79,11 @@ describe('Update blog posts through the BlogController', () => {
 	});
 
 	test('Test to see if the blog post status is set to approved', async (done) => {
-		const oldApproved = seededPost.approved;
-		seededPost.approved = true;
+		seededPost.approved = 1;
 		const query = makeQuery('POST', '/blogs/update', JSON.stringify(seededPost));
 
 		const { blog } = JSON.parse(await request(query));
-		expect(blog.approved).toBe(!oldApproved);
+		expect(blog.approved).toBe(1);
 		done();
 	});
 });
