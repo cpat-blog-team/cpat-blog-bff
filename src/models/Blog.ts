@@ -8,6 +8,7 @@ export interface IBlog extends Document {
 	content: string;
 	version: number;
 	date: string;
+	approved: boolean;
 }
 
 interface IBlogModel extends Model<IBlog> { }
@@ -20,7 +21,8 @@ export const schema = new Schema(
 		summary: { type: String, required: true },
 		content: { type: String, required: true },
 		version: { type: Number, required: true },
-		date: { type: String, required: true }
+		date: { type: String, required: true },
+		approved: { type: Schema.Types.Boolean, required: true }
 	},
 	{ timestamps: true }
 );
