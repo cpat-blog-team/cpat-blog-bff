@@ -22,7 +22,7 @@ export const schema = new Schema(
 		content: { type: String, required: true },
 		version: { type: Number, required: true },
 		date: { type: String, required: true },
-		approved: { type: Schema.Types.Boolean, required: true }
+		approved: { type: Boolean, required: true }
 	},
 	{ timestamps: true }
 );
