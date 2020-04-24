@@ -12,7 +12,7 @@ export interface IBlog {
 	review: string;
 }
 
-interface IBlogDocument extends Document, IBlog { }
+interface IBlogDocument extends IBlog, Document { }
 interface IBlogModel extends Model<IBlogDocument> { }
 
 export enum ApprovalStatus {
@@ -30,7 +30,7 @@ export const schema = new Schema(
 		content: { type: String, required: true },
 		version: { type: Number, required: true },
 		date: { type: String, required: true },
-		approved: { type: ApprovalStatus, required: true, default: 'Pending' },
+		approved: { type: ApprovalStatus, required: true, default: ApprovalStatus.Pending },
 		review: { type: String, required: false, default: '' }
 	},
 	{ timestamps: true }

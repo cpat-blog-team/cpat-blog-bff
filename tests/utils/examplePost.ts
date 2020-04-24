@@ -9,7 +9,7 @@ export const examplePost: IBlog = {
 	content: JSON.stringify(new Delta([{ insert: 'bobs content' }])),
 	version: 1,
 	date: new Date().toDateString(),
-	approved: 'Pending' as ApprovalStatus,
+	approved: ApprovalStatus.Approved,
 	review: ''
 };
 
@@ -21,7 +21,7 @@ const numberedPost = (number: number) => ({
 	content: JSON.stringify(new Delta([{ insert: 'bobs content' }])),
 	version: 1,
 	date: new Date().toDateString(),
-	approved: 'Pending' as ApprovalStatus,
+	approved: ApprovalStatus.Approved,
 	review: ''
 });
 

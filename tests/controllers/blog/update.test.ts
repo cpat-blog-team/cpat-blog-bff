@@ -1,11 +1,12 @@
 import * as BlogController from '../../../src/controllers/blogs';
 import request from 'request-promise';
 import { examplePost, makeQuery } from '../../utils';
+import { ApprovalStatus } from '../../../src/models/Blog';
 
 describe('Update blog posts through the BlogController', () => {
 	let seededPost: any;
 
-	beforeAll(async (done) => {
+	beforeEach(async (done) => {
 		// wipe DB
 		await request(makeQuery('DELETE', '/dev/wipeDB', null));
 		// seed DB with examplePost
@@ -84,6 +85,20 @@ describe('Update blog posts through the BlogController', () => {
 
 		const { blog } = JSON.parse(await request(query));
 		expect(blog.approved).toBe(1);
+		done();
+	});
+
+	test('Should update version when updating title, summary or content', async (done) => {
+		const query = makeQuery('PATCH', `/blogs/${seededPost._id}`, JSON.stringify({ title: 'a new title' }));
+		const { blog } = JSON.parse(await request(query));
+		expect(blog.version).toBe(seededPost.version + 1);
+		done();
+	});
+
+	test('Should not update version when not updating title, summary or content', async (done) => {
+		const query = makeQuery('PATCH', `/blogs/${seededPost._id}`, JSON.stringify({ approved: ApprovalStatus.Approved }));
+		const { blog } = JSON.parse(await request(query));
+		expect(blog.version).toBe(seededPost.version);
 		done();
 	});
 });
