@@ -17,11 +17,11 @@ router.get('/user/search', UserController.search);
 router.get('/user/all', UserController.all);
 
 // Blog routes
-router.post('/blogs/update', BlogController.update);
+router.patch('/blogs/:id', BlogController.update);
+router.delete('/blogs/:id', BlogController.deleteById);
 router.post('/blogs/add', BlogController.add);
 router.get('/blogs/search', BlogController.search);
 router.get('/blogs/:id', BlogController.getById);
-router.delete('/blogs/:id', BlogController.deleteById);
 router.get('/blogs', BlogController.all);
 
 // Community Guidelines routes

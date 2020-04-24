@@ -22,14 +22,14 @@ describe('Update blog posts through the BlogController', () => {
 	});
 
 	test('Test to see if receive valid response from the controller will update the version by 1', async (done) => {
-		const query = makeQuery('POST', '/blogs/update', JSON.stringify(seededPost));
+		const query = makeQuery('PATCH', `/blogs/${seededPost._id}`, JSON.stringify(seededPost));
 		const { blog } = JSON.parse(await request(query));
 		expect(blog.version).toBe(seededPost.version + 1);
 		done();
 	});
 
 	test('Test to see if receive valid response from the controller', async (done) => {
-		const query = makeQuery('POST', '/blogs/update', JSON.stringify(seededPost));
+		const query = makeQuery('PATCH', `/blogs/${seededPost._id}`, JSON.stringify(seededPost));
 		const { blog } = JSON.parse(await request(query));
 		expect(typeof blog).toBe('object');
 		Object.keys(seededPost).forEach((property) => {
@@ -41,7 +41,7 @@ describe('Update blog posts through the BlogController', () => {
 	test('Test to see if receive valid response from the controller will update the content', async (done) => {
 		const oldContent = seededPost.content;
 		seededPost.content = 'I was changed by a test!';
-		const query = makeQuery('POST', '/blogs/update', JSON.stringify(seededPost));
+		const query = makeQuery('PATCH', `/blogs/${seededPost._id}`, JSON.stringify(seededPost));
 
 		const { blog } = JSON.parse(await request(query));
 		expect(blog.content).not.toBe(oldContent);
@@ -51,7 +51,7 @@ describe('Update blog posts through the BlogController', () => {
 	test('Test to see if receive valid response from the controller will update the summary', async (done) => {
 		const oldSummary = seededPost.summary;
 		seededPost.summary = 'I was changed by a test!';
-		const query = makeQuery('POST', '/blogs/update', JSON.stringify(seededPost));
+		const query = makeQuery('PATCH', `/blogs/${seededPost._id}`, JSON.stringify(seededPost));
 
 		const { blog } = JSON.parse(await request(query));
 		expect(blog.summary).not.toBe(oldSummary);
@@ -61,7 +61,7 @@ describe('Update blog posts through the BlogController', () => {
 	test('Test to see if receive valid response from the controller will update the title', async (done) => {
 		const oldTitle = seededPost.title;
 		seededPost.title = 'I was changed by a test!';
-		const query = makeQuery('POST', '/blogs/update', JSON.stringify(seededPost));
+		const query = makeQuery('PATCH', `/blogs/${seededPost._id}`, JSON.stringify(seededPost));
 
 		const { blog } = JSON.parse(await request(query));
 		expect(blog.title).not.toBe(oldTitle);
@@ -71,7 +71,7 @@ describe('Update blog posts through the BlogController', () => {
 	test('Test to see if that the endpoint can not change the email on a blog post', async (done) => {
 		const oldEmail = seededPost.email;
 		seededPost.email = 'bruce banner';
-		const query = makeQuery('POST', '/blogs/update', JSON.stringify(seededPost));
+		const query = makeQuery('PATCH', `/blogs/${seededPost._id}`, JSON.stringify(seededPost));
 
 		const { blog } = JSON.parse(await request(query));
 		expect(blog.email).toBe(oldEmail);
@@ -80,7 +80,7 @@ describe('Update blog posts through the BlogController', () => {
 
 	test('Test to see if the blog post status is set to approved', async (done) => {
 		seededPost.approved = 1;
-		const query = makeQuery('POST', '/blogs/update', JSON.stringify(seededPost));
+		const query = makeQuery('PATCH', `/blogs/${seededPost._id}`, JSON.stringify(seededPost));
 
 		const { blog } = JSON.parse(await request(query));
 		expect(blog.approved).toBe(1);

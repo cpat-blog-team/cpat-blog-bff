@@ -3,7 +3,7 @@ import handleErrorMiddleware from '../../middleware/handle-error-middleware';
 import Blog from '../../models/Blog';
 
 const update: RequestHandler = async (req, res) => {
-	const _id = req.body._id;
+	const _id = req.params.id;
 	console.log(req.body);
 
 	// iterate the version if it is going to be updated

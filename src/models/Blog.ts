@@ -9,7 +9,7 @@ export interface IBlog {
 	version: number;
 	date: string;
 	approved: ApprovalStatus;
-	comments: string[];
+	review: string;
 }
 
 interface IBlogDocument extends Document, IBlog { }
@@ -31,7 +31,7 @@ export const schema = new Schema(
 		version: { type: Number, required: true },
 		date: { type: String, required: true },
 		approved: { type: ApprovalStatus, required: true, default: 'Pending' },
-		comments: { type: Array, required: false, default: [] }
+		review: { type: String, required: false, default: '' }
 	},
 	{ timestamps: true }
 );

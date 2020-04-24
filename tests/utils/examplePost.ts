@@ -10,7 +10,7 @@ export const examplePost: IBlog = {
 	version: 1,
 	date: new Date().toDateString(),
 	approved: 'Pending' as ApprovalStatus,
-	comments: [] as string[]	
+	review: ''
 };
 
 const numberedPost = (number: number) => ({
@@ -22,7 +22,7 @@ const numberedPost = (number: number) => ({
 	version: 1,
 	date: new Date().toDateString(),
 	approved: 'Pending' as ApprovalStatus,
-	comments: [] as string[]
+	review: ''
 });
 
 export const exampleList = (numberOfPosts: number) => {
