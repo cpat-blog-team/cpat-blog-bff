@@ -2,7 +2,6 @@ import { Router } from 'express';
 import swaggerUi from 'swagger-ui-express';
 import apiSpec from '../openapi.json';
 
-import * as UserController from './controllers/user';
 import * as BlogController from './controllers/blogs';
 import * as CommunityGuidelinesController from './controllers/communityGuidelines';
 import * as SeedController from './controllers/seed';
@@ -10,11 +9,6 @@ import * as SeedController from './controllers/seed';
 const swaggerUiOptions = { customCss: '.swagger-ui .topbar { display: none }' };
 
 const router = Router();
-
-// User routes
-router.post('/user/add', UserController.add);
-router.get('/user/search', UserController.search);
-router.get('/user/all', UserController.all);
 
 // Blog routes
 router.patch('/blogs/:id', BlogController.update);
