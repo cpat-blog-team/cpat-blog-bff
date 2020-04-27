@@ -11,11 +11,6 @@ const swaggerUiOptions = { customCss: '.swagger-ui .topbar { display: none }' };
 
 const router = Router();
 
-// User routes
-router.post('/user/add', UserController.add);
-router.get('/user/search', UserController.search);
-router.get('/user/all', UserController.all);
-
 // Blog routes
 router.patch('/blogs/:id', BlogController.update);
 router.delete('/blogs/:id', BlogController.deleteById);
