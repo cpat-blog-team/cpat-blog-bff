@@ -12,8 +12,9 @@ const swaggerUiOptions = { customCss: '.swagger-ui .topbar { display: none }' };
 const router = Router();
 
 // APPid routes
-router.get('/appid/users', AppIdController.getAllUsers);
+router.get('/appid/user/:email', AppIdController.getUserByEmail);
 router.get('/appid/roles/:id', AppIdController.getRolesByID);
+router.get('/appid/users', AppIdController.getAllUsers);
 
 // Blog routes
 router.patch('/blogs/:id', BlogController.update);

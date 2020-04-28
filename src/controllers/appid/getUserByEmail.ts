@@ -1,23 +1,35 @@
 import handleErrorMiddleware from '../../middleware/handle-error-middleware';
 import request from 'request-promise';
 import { makeXmlQuery } from '../../utils/makeXmlQuery';
+import { RequestHandler } from 'express';
+import getToken from './getToken';
 
 require('dotenv').config();
 
-const getToken = async () => {
+const getUserByEmail: RequestHandler = async (req, res) => {
+	let token = await getToken();
+	let myHeaders = { Authorization: `Bearer ${token}` };
+
+	const { email } = req.params;
+	if (!email) return res.status(400).send('Error missing params: email');
+
 	try {
-		const { access_token } = JSON.parse(
+		const { users } = JSON.parse(
 			await request(
-				makeXmlQuery('POST', null, 'https://iam.cloud.ibm.com//oidc/token', {
-					grant_type: 'urn:ibm:params:oauth:grant-type:apikey',
-					apikey: process.env.APP_ID_SECRET
-				})
+				makeXmlQuery(
+					'GET',
+					myHeaders,
+					`https://us-south.appid.cloud.ibm.com/management/v4/${process.env
+						.TENNANT_ID}/users/?email=${email}`,
+					null
+				)
 			)
 		);
-		return access_token;
+
+		res.status(200).send(users);
 	} catch (err) {
-		return err;
+		res.status(400).send(err);
 	}
 };
 
-export default getToken;
+export default handleErrorMiddleware(getUserByEmail);
