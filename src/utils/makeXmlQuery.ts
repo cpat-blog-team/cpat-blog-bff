@@ -2,10 +2,8 @@ export const makeXmlQuery = (method: string, headers: object, route: string, for
 	if (!headers) headers = {};
 
 	const default_headers = {
-		'Content-Type': [ 'application/x-www-form-urlencoded', 'application/x-www-form-urlencoded' ]
+		'Content-Type': ['application/x-www-form-urlencoded', 'application/x-www-form-urlencoded']
 	};
-
-	console.log({ ...default_headers, ...headers });
 
 	const query: any = {
 		method,

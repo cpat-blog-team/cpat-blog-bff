@@ -13,8 +13,9 @@ const router = Router();
 
 // APPid routes
 router.get('/appid/user/:email', AppIdController.getUserByEmail);
-router.get('/appid/roles/:id', AppIdController.getRolesByID);
 router.get('/appid/users', AppIdController.getAllUsers);
+router.put('/appid/roles/:id', AppIdController.updateUserRoles);
+router.get('/appid/roles/:id', AppIdController.getRolesByID);
 
 // Blog routes
 router.patch('/blogs/:id', BlogController.update);
