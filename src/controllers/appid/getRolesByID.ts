@@ -26,8 +26,6 @@ const getAllUsers: RequestHandler = async (req, res) => {
 			)
 		);
 
-		const allRoles = roles.map(({ name }: any) => name);
-
 		// get user's roles by id
 		const response = JSON.parse(
 			await request(
@@ -44,7 +42,7 @@ const getAllUsers: RequestHandler = async (req, res) => {
 
 		const result = {
 			activeRole: activeRole.name,
-			roles: allRoles.map(({ name }: any) => name)
+			roles: roles.map(({ name }: any) => name)
 		};
 
 		res.status(200).send(result);
