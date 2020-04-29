@@ -40,12 +40,12 @@ const getAllUsers: RequestHandler = async (req, res) => {
 
 		const activeRole = response.roles.pop() || { name: '' };
 
-		const result = {
+		const payload = {
 			activeRole: activeRole.name,
-			roles: roles.map(({ name }: any) => name)
+			roles: [ ...roles.map(({ name }: any) => name), 'none' ]
 		};
 
-		res.status(200).send(result);
+		res.status(200).send(payload);
 	} catch (err) {
 		res.status(400).send(err);
 	}
