@@ -40,15 +40,14 @@ const getAllUsers: RequestHandler = async (req, res) => {
 			)
 		);
 
-		let userRoles = new Set(
-			response.roles.map((role: any) => {
-				return role.name;
-			})
-		);
+		const activeRole = response.roles.pop() || { name: '' };
 
-		const activeRoles = allRoles.map((role: string) => ({ name: role, status: userRoles.has(role) }));
+		const result = {
+			activeRole: activeRole.name,
+			roles: allRoles.map(({ name }: any) => name)
+		};
 
-		res.status(200).send(activeRoles);
+		res.status(200).send(result);
 	} catch (err) {
 		res.status(400).send(err);
 	}
