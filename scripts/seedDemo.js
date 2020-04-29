@@ -14,7 +14,8 @@ const demoList = [
     title: 'Bobs blog',
     summary: 'bobs summary',
     version: 1,
-    date: new Date().toDateString()
+    date: new Date().toDateString(),
+    approved: 'Approved'
   },
   {
     email: 'mark@ibm.com',
@@ -22,7 +23,8 @@ const demoList = [
     title: '5 WKF Tips',
     summary: '5 Tips to be more while productive working from home',
     version: 1,
-    date: new Date().toDateString()
+    date: new Date().toDateString(),
+    approved: 'Approved'
   },
   {
     email: 'isaiah@ibm.com',
@@ -30,7 +32,8 @@ const demoList = [
     title: 'My Software Engineering Journey',
     summary: 'How I became a software engineer',
     version: 1,
-    date: new Date().toDateString()
+    date: new Date().toDateString(),
+    approved: 'Approved'
   },
   {
     email: 'esther@ibm.com',
@@ -38,7 +41,8 @@ const demoList = [
     title: '10 Things to know about CP4A',
     summary: '10 things you should know about cloud pak for applications',
     version: 1,
-    date: new Date().toDateString()
+    date: new Date().toDateString(),
+    approved: 'Approved'
   },
   {
     email: 'dan@ibm.com',
@@ -46,7 +50,8 @@ const demoList = [
     title: 'Installing openshift 4.3',
     summary: 'A quick guide on installing openshift 4,3',
     version: 1,
-    date: new Date().toDateString()
+    date: new Date().toDateString(),
+    approved: 'Approved'
   },
   {
     email: 'napoleon@ibm.com',
@@ -54,7 +59,8 @@ const demoList = [
     title: 'Tekton Crash Course',
     summary: 'Everything you need to know about tekton in 5 minutes',
     version: 1,
-    date: new Date().toDateString()
+    date: new Date().toDateString(),
+    approved: 'Approved'
   },
   {
     email: 'dave@ibm.com',
@@ -62,7 +68,8 @@ const demoList = [
     title: 'Installing CP4D on IBM cloud',
     summary: 'My guide to installing cp4d on ibm cloud',
     version: 1,
-    date: new Date().toDateString()
+    date: new Date().toDateString(),
+    approved: 'Approved'
   }
 ];
 
