@@ -5,10 +5,17 @@ import apiSpec from '../openapi.json';
 import * as BlogController from './controllers/blogs';
 import * as CommunityGuidelinesController from './controllers/communityGuidelines';
 import * as SeedController from './controllers/seed';
+import * as AppIdController from './controllers/appid';
 
 const swaggerUiOptions = { customCss: '.swagger-ui .topbar { display: none }' };
 
 const router = Router();
+
+// APPid routes
+router.get('/appid/user/:email', AppIdController.getUserByEmail);
+router.get('/appid/users', AppIdController.getAllUsers);
+router.put('/appid/roles/:id', AppIdController.updateUserRoles);
+router.get('/appid/roles/:id', AppIdController.getRolesByID);
 
 // Blog routes
 router.patch('/blogs/:id', BlogController.update);
