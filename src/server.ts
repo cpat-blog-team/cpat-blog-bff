@@ -17,6 +17,8 @@ import * as BlogController from './controllers/blogs';
 import * as CommunityGuidelinesController from './controllers/communityGuidelines';
 import * as SeedController from './controllers/seed';
 import * as AppIdController from './controllers/appid';
+import * as UploadController from './controllers/uploads';
+import * as ImageController from './controllers/images';
 
 const swaggerUiOptions = { customCss: '.swagger-ui .topbar { display: none }' };
 
@@ -27,7 +29,7 @@ if (result.error) {
 }
 
 const app:any = express();
-let gfs;
+export let gfs:any;
 
 // MIDDLEWARE
 app.use(compression());
@@ -113,6 +115,13 @@ router.post('/blogs/add', upload.single('file'), BlogController.add);
 router.get('/blogs/search', BlogController.search);
 router.get('/blogs/:id', BlogController.getById);
 router.get('/blogs', BlogController.all);
+
+// Upload routes
+router.get('/uploads', UploadController.all);
+router.get('/uploads/:filename', UploadController.search);
+
+// Image routes
+router.get('/images/:filename', ImageController.search);
 
 // Community Guidelines routes
 router.post('/communityGuidelines', CommunityGuidelinesController.add);

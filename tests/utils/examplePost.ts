@@ -10,7 +10,8 @@ export const examplePost: IBlog = {
 	version: 1,
 	date: new Date().toDateString(),
 	approved: ApprovalStatus.Approved,
-	review: ''
+	review: '',
+	filename: ''
 };
 
 const numberedPost = (number: number) => ({
@@ -22,7 +23,8 @@ const numberedPost = (number: number) => ({
 	version: 1,
 	date: new Date().toDateString(),
 	approved: ApprovalStatus.Approved,
-	review: ''
+	review: '',
+	filename: ''
 });
 
 export const exampleList = (numberOfPosts: number) => {
