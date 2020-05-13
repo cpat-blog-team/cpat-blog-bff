@@ -28,8 +28,8 @@ if (result.error) {
 	dotenv.config({ path: '.env.default' });
 }
 
-const app:any = express();
-export let gfs:any;
+const app: any = express();
+export let gfs: any;
 
 // MIDDLEWARE
 app.use(compression());
@@ -58,43 +58,49 @@ if (process.env.MONGO_URL == null) {
 	});
 	process.exit(1);
 } else {
-	const conn = mongoose.connect(process.env.MONGO_URL, { 
-		useNewUrlParser: true,
-		useCreateIndex: true,
-		useUnifiedTopology: true
-	}).then(({connection}) => {
-		app.listen(process.env.PORT, (): void => {
-			console.log('\x1b[36m%s\x1b[0m', // eslint-disable-line
-				`🌏 Express server started at http://localhost:${app.get('port')}`);
-			if (process.env.NODE_ENV === 'development') {
-				console.log('\x1b[36m%s\x1b[0m', // eslint-disable-line
-					`⚙️  Swagger UI hosted at http://localhost:${app.get('port')}/dev/api-docs`);
-			}
-		});
+	const conn = mongoose
+		.connect(process.env.MONGO_URL, {
+			useNewUrlParser: true,
+			useCreateIndex: true,
+			useUnifiedTopology: true
+		})
+		.then(({ connection }) => {
+			app.listen(process.env.PORT, (): void => {
+				console.log(
+					'\x1b[36m%s\x1b[0m', // eslint-disable-line
+					`🌏 Express server started at http://localhost:${app.get('port')}`
+				);
+				if (process.env.NODE_ENV === 'development') {
+					console.log(
+						'\x1b[36m%s\x1b[0m', // eslint-disable-line
+						`⚙️  Swagger UI hosted at http://localhost:${app.get('port')}/dev/api-docs`
+					);
+				}
+			});
 
-		// Initailize GFS Stream
-		gfs = Grid(connection.db, mongoose.mongo);
-		gfs.collection('uploads');
-	});
-};
+			// Initailize GFS Stream
+			gfs = Grid(connection.db, mongoose.mongo);
+			gfs.collection('uploads');
+		});
+}
 
 // CREATE STORAGE ENGINE
 const storage = new GridFsStorage({
 	url: process.env.MONGO_URL,
 	file: (req, file) => {
-	return new Promise((resolve, reject) => {
-		crypto.randomBytes(16, (err, buf) => {
-		if (err) {
-			return reject(err);
-		}
-		const filename = buf.toString('hex') + path.extname(file.originalname);
-		const fileInfo = {
-			filename: filename,
-			bucketName: 'uploads'
-		};
-		resolve(fileInfo);
+		return new Promise((resolve, reject) => {
+			crypto.randomBytes(16, (err, buf) => {
+				if (err) {
+					return reject(err);
+				}
+				const filename = buf.toString('hex') + path.extname(file.originalname);
+				const fileInfo = {
+					filename: filename,
+					bucketName: 'uploads'
+				};
+				resolve(fileInfo);
+			});
 		});
-	});
 	}
 });
 
@@ -117,6 +123,7 @@ router.get('/blogs/:id', BlogController.getById);
 router.get('/blogs', BlogController.all);
 
 // Upload routes
+router.post('/uploads', upload.single('file'), UploadController.add);
 router.get('/uploads', UploadController.all);
 router.get('/uploads/:filename', UploadController.search);
 
@@ -139,4 +146,3 @@ if (process.env.NODE_ENV === 'development') {
 
 // ROUTES
 app.use(router);
-
