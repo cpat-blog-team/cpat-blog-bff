@@ -13,7 +13,7 @@ docker-compose -f docker-compose.dev.yml up -d --force-recreate --remove-orphans
 echo "loading database ..."
 sleep 3
 echo "loading webserver ..."
-sleep 7
+sleep 10
 echo "loading tests ..."
 jest --runInBand --coverage
 docker-compose -f docker-compose.dev.yml down
