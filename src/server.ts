@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import logger from './logger';
 import path from 'path';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
@@ -52,7 +51,7 @@ app.use((err: ApplicationError, req: Request, res: Response, next: NextFunction)
 });
 
 if (process.env.MONGO_URL == null) {
-	logger.log({
+	console.log({
 		level: 'error',
 		message: 'MONGO_URL not specified in environment'
 	});
