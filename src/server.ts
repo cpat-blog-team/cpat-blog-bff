@@ -114,7 +114,8 @@ router.put('/appid/roles/:id', AppIdController.updateUserRoles);
 router.get('/appid/roles/:id', AppIdController.getRolesByID);
 
 // Blog routes
-router.patch('/blogs/:id', BlogController.update);
+router.patch('/blogs/updateApprovalStatus/:id', BlogController.update);
+router.patch('/blogs/:id', upload.none(), BlogController.update);
 router.delete('/blogs/:id', BlogController.deleteById);
 router.post('/blogs/add', upload.single('file'), BlogController.add);
 router.get('/blogs/search', BlogController.search);
