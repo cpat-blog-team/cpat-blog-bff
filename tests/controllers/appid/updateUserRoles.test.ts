@@ -20,7 +20,7 @@ describe('This tests if you can update Users roles by their appid id from the ap
 		done();
 	});
 
-	xtest('Should be able to add roles to user by passing array of role names', async (done) => {
+	test('Should be able to add roles to user by passing array of role names', async (done) => {
 		const role: string = 'moderator';
 		const permissions = JSON.stringify({ role });
 
