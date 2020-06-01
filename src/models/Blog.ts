@@ -31,7 +31,7 @@ export const schema = new Schema(
 		content: { type: String, required: true },
 		version: { type: Number, required: true },
 		date: { type: String, required: true },
-		approved: { type: ApprovalStatus, required: true, default: ApprovalStatus.Pending },
+		approved: { type: ApprovalStatus, required: true, default: ApprovalStatus.Approved },
 		review: { type: String, required: false, default: '' },
 		filename: { type: String, required: false }
 	},
