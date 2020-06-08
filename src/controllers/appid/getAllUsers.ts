@@ -16,7 +16,7 @@ const getAllUsers: RequestHandler = async (req, res) => {
 				makeXmlQuery(
 					'GET',
 					myHeaders,
-					`https://us-south.appid.cloud.ibm.com/management/v4/${process.env.TENNANT_ID}/users`,
+					`https://us-south.appid.cloud.ibm.com/management/v4/${process.env.TENANT_ID}/users`,
 					null
 				)
 			)

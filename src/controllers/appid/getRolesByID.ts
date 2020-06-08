@@ -20,7 +20,7 @@ const getAllUsers: RequestHandler = async (req, res) => {
 				makeXmlQuery(
 					'GET',
 					myHeaders,
-					`https://us-south.appid.cloud.ibm.com/management/v4/${process.env.TENNANT_ID}/roles`,
+					`https://us-south.appid.cloud.ibm.com/management/v4/${process.env.TENANT_ID}/roles`,
 					null
 				)
 			)
@@ -32,7 +32,7 @@ const getAllUsers: RequestHandler = async (req, res) => {
 				makeXmlQuery(
 					'GET',
 					myHeaders,
-					`https://us-south.appid.cloud.ibm.com/management/v4/${process.env.TENNANT_ID}/users/${id}/roles`,
+					`https://us-south.appid.cloud.ibm.com/management/v4/${process.env.TENANT_ID}/users/${id}/roles`,
 					null
 				)
 			)
@@ -42,7 +42,7 @@ const getAllUsers: RequestHandler = async (req, res) => {
 
 		const payload = {
 			activeRole: activeRole.name,
-			roles: [ ...roles.map(({ name }: any) => name), 'none' ]
+			roles: [...roles.map(({ name }: any) => name), 'none'],
 		};
 
 		res.status(200).send(payload);

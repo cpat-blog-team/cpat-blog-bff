@@ -14,7 +14,8 @@ const updateUserRoles: RequestHandler = async (req, res) => {
 	if (!id) return res.status(400).send('Error missing params: id');
 
 	const { role } = req.body;
-	if (!role) return res.status(400).send('Error missing property in body: role');
+	if (!role)
+		return res.status(400).send('Error missing property in body: role');
 
 	try {
 		// put user's roles by id
@@ -23,8 +24,8 @@ const updateUserRoles: RequestHandler = async (req, res) => {
 				makeJsonQuery(
 					'PUT',
 					myHeaders,
-					`https://us-south.appid.cloud.ibm.com/management/v4/${process.env.TENNANT_ID}/users/${id}/roles`,
-					{ roles: { names: role === 'none' ? [] : [ role ] } }
+					`https://us-south.appid.cloud.ibm.com/management/v4/${process.env.TENANT_ID}/users/${id}/roles`,
+					{ roles: { names: role === 'none' ? [] : [role] } }
 				)
 			)
 		);
