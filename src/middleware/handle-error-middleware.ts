@@ -1,5 +1,4 @@
 import { RequestHandler } from 'express';
-import logger from '../logger';
 
 /**
  * This router wrapper catches any error from async await
@@ -10,7 +9,7 @@ import logger from '../logger';
 const errorMW = (handler: RequestHandler): RequestHandler => async (req, res, next) => {
 	handler(req, res, next).catch((err: Error) => {
 		if (process.env.NODE_ENV === 'development') {
-			logger.log({
+			console.log({
 				level: 'error',
 				message: 'Error in request handler',
 				error: err

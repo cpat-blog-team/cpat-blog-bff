@@ -9,7 +9,8 @@ describe('test mongoose User model', () => {
 			title: 'star wars VVV',
 			summary: 'a story about space wizards',
 			content: 'obiwan is alive',
-			date: new Date()
+			date: new Date(),
+			approved: false
 		};
 
 		for (let property in properties) {

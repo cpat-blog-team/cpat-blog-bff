@@ -1,17 +1,10 @@
 import { RequestHandler } from 'express';
 import handleErrorMiddleware from '../../middleware/handle-error-middleware';
-import User from '../../models/User';
 
 const add: RequestHandler = async (req, res) => {
-	const { name, email, password } = req.body;
-
-	const user = new User({ name, email, password });
-	await user.save();
-
-	res.send({
-		message: 'Saved',
-		user: user.toJSON()
-	});
+	const { filename } = req.file;
+	if (!filename) res.status(500).send('Error uploading Image');
+	else res.status(200).send({ url: `/images/${req.file.filename}` });
 };
 
 export default handleErrorMiddleware(add);

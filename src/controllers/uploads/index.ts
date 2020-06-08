@@ -1,7 +1,5 @@
-import add from './add';
 import all from './all';
 import search from './search';
+import add from './add';
 
-export {
-	add, all, search
-};
+export { all, search, add };
