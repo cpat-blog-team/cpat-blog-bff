@@ -20,7 +20,7 @@ export const schema = new Schema(
     content: { type: String, required: true },
     version: { type: Number, required: true },
     date: { type: String, required: true },
-    title: { type: String, required: true }
+    title: { type: String, required: true, default: 'Community Guidelines' }
   },
   { timestamps: true }
 );
